@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/font/stylesheet.css" type="text/css" rel="stylesheet"/>
+
+		<link rel="stylesheet" href="css/lib/angular/angular-material.min.css" />
+
+		<link href="css/font/material-icons.css" rel="stylesheet" />
+
+		<title>Ad-Extreme</title>
+
+		<!-- JQuery Library -->
+		<script src="lib/jquery.min.js"></script>
+
+		<!-- Angular Library -->
+		<script src="lib/angular/js/angular.min.js"></script>
+		<script src="lib/angular/js/angular-animate.min.js"></script>
+		<script src="lib/angular/js/angular-aria.min.js"></script>
+		<script src="lib/angular/js/angular-messages.min.js"></script>
+		<script src="lib/angular/js/angular-ui-router.min.js"></script>
+
+		<!-- Angular Material Library -->
+		<script src="lib/angular/js/angular-material.min.js"></script>
+
+		<!-- Controllers -->
+		<script src="js/app.js"></script>
+		<script src="js/mainController.js"></script>
+		<script src="js/loginController.js"></script>
+		
+	</head>
+	<body ng-app="AdExtreme">
+			<md-content id="tudo">
+				<div class="container">
+				    <div ui-view></div>
+				</div>
+
+				<footer id="rodape">
+						<p class="copyright">Ad-Extreme ©2017</p>
+				</footer>
+			</md-content>
+	</body>
+</html>
