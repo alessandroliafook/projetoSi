@@ -1,1 +1,41 @@
-<h2>Main</h2>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools" layout="row">
+
+        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate>$ ad-extreme</h2>
+
+        <md-menu-bar layout="row">
+            <md-menu flex>
+                <!-- Trigger element is a md-button with an icon -->
+                <md-button ng-click="$mdOpenMenu($event)" aria-label="Open menu">
+                    Anúncios
+                </md-button>
+                <md-menu-content width="4" id="options">
+
+                    <md-menu-item md-menu-origin md-menu-align-target>
+                        <md-button ng-click="cadastrarAnuncio()">
+                            Cadastrar
+                        </md-button>
+                    </md-menu-item>
+
+                    <md-menu-item>
+                        <md-button ng-click="mostraAnuncios()">
+                            Todos os anúncios
+                        </md-button>
+                    </md-menu-item>
+
+                </md-menu-content>
+            </md-menu>
+        </md-menu-bar>
+
+
+        <md-button ng-click="logout()">
+            <md-icon><i class="material-icons">exit_to_app</i></md-icon>
+            Logout
+        </md-button>
+
+    </div>
+</md-toolbar>
