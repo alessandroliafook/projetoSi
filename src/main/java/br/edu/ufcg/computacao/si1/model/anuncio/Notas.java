@@ -1,4 +1,4 @@
-package br.edu.ufcg.computacao.si1.model;
+package br.edu.ufcg.computacao.si1.model.anuncio;
 
 /**
  * Created by Marcus Oliveira on 08/12/16.

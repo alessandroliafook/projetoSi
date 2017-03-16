@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
-import br.edu.ufcg.computacao.si1.model.Notas;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Notas;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.junit.After;
 import org.junit.Before;
