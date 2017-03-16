@@ -5,6 +5,7 @@ import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 @Configuration
@@ -27,4 +28,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/404").setViewName("error/404");
         registry.addViewController("/500").setViewName("error/500");
     }
+
+
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/resources/static/**")
+//                .addResourceLocations("/resources/static/");
+//    }
 }

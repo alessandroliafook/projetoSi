@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools" layout="row">
 
-</body>
-</html>
+        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate>$ ad-extreme</h2>
+
+
+        <md-button ng-click="logout()">
+            <md-icon><i class="material-icons">exit_to_app</i></md-icon>
+            Logout
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-content id="cadastro">
+    <form name="cadastroForm" layout="column">
+        <md-content class="md-no-momentum" id="cadastro-form">
+
+            <h2 class="text-center" layout="row" layout-align="space-around center">Cadastrar anúncio</h2>
+
+            <md-input-container class="md-block" layout="row">
+                <md-icon><i class="material-icons">title</i></md-icon>
+                <input ng-model="inputData.title" type="text" placeholder="Título" ng-required="true">
+            </md-input-container>
+
+            <md-input-container class="md-block" layout="row">
+                <md-icon><i class="material-icons">attach_money</i></md-icon>
+                <input ng-model="inputData.price" type="number" placeholder="Preço" ng-required="true">
+            </md-input-container>
+
+            <fieldset class="standard" layout="row" layout-align="space-around center">
+                <legend>Escolha um tipo</legend>
+
+                <md-checkbox ng-model="inputData.type['Movel']" ng-disabled="isDisabled('Movel')">
+                    Móvel
+                </md-checkbox>
+
+                <md-checkbox ng-model="inputData.type['Imovel']" ng-disabled="isDisabled('Imovel')">
+                    Imóvel
+                </md-checkbox>
+
+                <md-checkbox ng-model="inputData.type['Emprego']" ng-disabled="isDisabled('Emprego')">
+                    Emprego
+                </md-checkbox>
+
+            </fieldset>
+
+            <div layout="row" layout-align="space-around center">
+                <md-button class="md-raised md-primary">Cadastrar</md-button>
+                <md-button class="md-raised md-warn md-hue-2">Limpar</md-button>
+            </div>
+        </md-content>
+    </form>
+</md-content>

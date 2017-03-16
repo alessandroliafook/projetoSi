@@ -18,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }).state('cadastrarAnuncio', {
         url: '/cadastrarAnuncio',
         templateUrl: '/views/cadastrarAnuncio.html',
-        controller: 'cadastroController'
+        controller: 'CadastroController'
         });
 });
 
