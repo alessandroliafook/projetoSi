@@ -1,12 +1,12 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.model.form.UsuarioForm;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,41 +20,24 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario create(UsuarioForm usuarioForm) {
-
-        Usuario usuario=null;
-
-        switch (usuarioForm.getRole()){
-            case 1:
-                usuario = new Usuario(usuarioForm.getNome(), usuarioForm.getEmail(),
-                        usuarioForm.getSenha(), "USER");
-                break;
-            case 2:
-                usuario = new Usuario(usuarioForm.getNome(), usuarioForm.getEmail(),
-                        usuarioForm.getSenha(), "COMPANY");
-
-                //new BCryptPasswordEncoder().encode(usuarioForm.getSenha()), "COMPANY");
-                usuario.setRole("COMPANY");
-                break;
-        }
-
+    public Usuario create(Usuario usuario) {
         System.out.println(usuario + "estah sendo criado");
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public Optional<Usuario> getById(Long id) {
-        return Optional.ofNullable(usuarioRepository.findOne(id));
+    public Usuario getById(Long id) {
+        return usuarioRepository.findOne(id);
     }
 
     @Override
-    public Optional<Usuario> getByEmail(String email) {
+    public Usuario getByEmail(String email) {
         System.out.println(email + "estah sendo retornado");
-        return Optional.ofNullable(usuarioRepository.findByEmail(email));
+        return usuarioRepository.findByEmail(email);
     }
 
     @Override
-    public Collection<Usuario> getAll() {
+    public List<Usuario> getAll() {
         return usuarioRepository.findAll();
     }
 
