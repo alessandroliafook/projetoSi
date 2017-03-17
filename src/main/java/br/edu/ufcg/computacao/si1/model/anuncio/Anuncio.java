@@ -1,6 +1,8 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,19 +24,22 @@ public class Anuncio {
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
+    @DecimalMin(value = "0.1", message = "O preço do anúncio não pode ser menor que 0.1")
     @Column(name = "data_criacao", nullable = false)
     private Date dataDeCriacao;
 
     @Column(name = "preco", nullable = false)
     private double preco;
 
+    @DecimalMin(value = "0.0", message = "Nota não pode ser menor que 0.0")
+    @DecimalMax(value = "5.0", message = "Nota não pode ser maior que 5.0")
     @Column(name = "nota")
-    private String nota;
+    private double nota;
 
     @Column(name = "tipo", nullable = false)
     private TipoAnuncio tipo;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double preco, String nota, String tipo) {
+    public Anuncio(String titulo, Date dataDeCriacao, double preco, double nota, String tipo) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.preco = preco;
@@ -46,7 +51,7 @@ public class Anuncio {
         titulo = "";
         dataDeCriacao = new Date();
         preco = 0;
-        nota = "";
+        nota = 0.0;
         tipo = TipoAnuncio.VAZIO;
     }
 
@@ -89,11 +94,11 @@ public class Anuncio {
         this.preco = preco;
     }
 
-    public String getNota() {
+    public double getNota() {
         return nota;
     }
 
-    public void setNota(String nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
 
@@ -116,7 +121,7 @@ public class Anuncio {
         if (!get_id().equals(anuncio.get_id())) return false;
         if (!getTitulo().equals(anuncio.getTitulo())) return false;
         if (!getDataDeCriacao().equals(anuncio.getDataDeCriacao())) return false;
-        if (getNota() != null ? !getNota().equals(anuncio.getNota()) : anuncio.getNota() != null) return false;
+        if (Double.compare(anuncio.getNota(), getNota()) != 0) return false;
         return getTipo().equals(anuncio.getTipo());
 
     }
@@ -130,7 +135,8 @@ public class Anuncio {
         result = 31 * result + getDataDeCriacao().hashCode();
         temp = Double.doubleToLongBits(getPreco());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (getNota() != null ? getNota().hashCode() : 0);
+        temp = Double.doubleToLongBits(getNota());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + getTipo().hashCode();
         return result;
     }
