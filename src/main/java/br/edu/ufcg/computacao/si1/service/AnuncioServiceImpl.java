@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.model.Anuncio;
+import br.edu.ufcg.computacao.si1.model.TipoAnuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class AnuncioServiceImpl implements AnuncioService {
         /*pegamos aqui todos os anuncios, mas retornamos os anuncios por tipo
         * filtrando o tipo, pelo equals, retornando um arrayLista*/
         return anuncioRepository.findAll().stream()
-                .filter(anuncio -> anuncio.getTipo().equals(tipo))
+                .filter(anuncio -> anuncio.getTipo().equals(TipoAnuncio.valueOf(tipo.toUpperCase())))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

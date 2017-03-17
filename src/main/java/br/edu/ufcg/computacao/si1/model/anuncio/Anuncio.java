@@ -12,9 +12,6 @@ import java.util.Date;
 @Table(name="tb_anuncio")
 public class Anuncio {
 
-    private static final String[] tipos = new String[] {"movel", "imovel", "emprego"};
-
-
     private final static DateFormat DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 
     @Id
@@ -35,14 +32,14 @@ public class Anuncio {
     private String nota;
 
     @Column(name = "tipo", nullable = false)
-    private String tipo;
+    private TipoAnuncio tipo;
 
     public Anuncio(String titulo, Date dataDeCriacao, double preco, String nota, String tipo) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.preco = preco;
         this.nota = nota;
-        this.tipo = tipo;
+        this.tipo = TipoAnuncio.valueOf(tipo.toUpperCase());
     }
 
     public Anuncio() {
@@ -50,7 +47,7 @@ public class Anuncio {
         dataDeCriacao = new Date();
         preco = 0;
         nota = "";
-        tipo = "";
+        tipo = TipoAnuncio.VAZIO;
     }
 
     /**
@@ -100,12 +97,12 @@ public class Anuncio {
         this.nota = nota;
     }
 
-    public String getTipo() {
+    public TipoAnuncio getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.tipo = TipoAnuncio.valueOf(tipo.toUpperCase());
     }
 
     @Override
