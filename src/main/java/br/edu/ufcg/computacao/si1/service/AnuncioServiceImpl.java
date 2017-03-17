@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -18,13 +19,8 @@ import java.util.stream.Collectors;
 public class AnuncioServiceImpl implements AnuncioService {
     //TODO add validity checks
 
-    private AnuncioRepository anuncioRepository;
-
     @Autowired
-    public AnuncioServiceImpl(AnuncioRepository anuncioRepository) {
-        /*neste codigo apenas atribuimos o repositorio jpa ao atributo */
-        this.anuncioRepository = anuncioRepository;
-    }
+    private AnuncioRepository anuncioRepository;
 
     public AnuncioRepository getAnuncioRepository(){
         return this.anuncioRepository;
@@ -37,13 +33,13 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
 
     @Override
-    public Optional<Anuncio> getById(Long id) {
+    public Anuncio getById(Long id) {
         /*aqui recuperamos o anuncio pelo seu id*/
-        return Optional.ofNullable(anuncioRepository.findOne(id));
+        return anuncioRepository.findOne(id);
     }
 
     @Override
-    public Collection<Anuncio> get(String tipo) {
+    public List<Anuncio> get(String tipo) {
 
         /*pegamos aqui todos os anuncios, mas retornamos os anuncios por tipo
         * filtrando o tipo, pelo equals, retornando um arrayLista*/
@@ -53,7 +49,7 @@ public class AnuncioServiceImpl implements AnuncioService {
     }
 
     @Override
-    public Collection<Anuncio> getAll() {
+    public List<Anuncio> getAll() {
         /*aqui retornamos todos os anuncios, sem distincao*/
 
         return anuncioRepository.findAll();
