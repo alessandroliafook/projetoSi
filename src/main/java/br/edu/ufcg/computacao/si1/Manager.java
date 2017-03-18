@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Alessandro Fook on 18/03/2017.
  */
-public class Controller {
+public class Manager {
 
 	@Autowired
 	AnuncioService anuncioService;
