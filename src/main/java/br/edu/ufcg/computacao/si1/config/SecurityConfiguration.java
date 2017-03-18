@@ -1,7 +1,6 @@
 package br.edu.ufcg.computacao.si1.config;
 
-import br.edu.ufcg.computacao.si1.model.Usuario;
-import br.edu.ufcg.computacao.si1.service.UsuarioService;
+import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -88,7 +87,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 Usuario usuario = usuarioService.getByEmail(email).get();
                 if(usuario != null){
                     return new User(usuario.getEmail(), usuario.getSenha(), true, true, true, true,
-                            AuthorityUtils.createAuthorityList(usuario.getR()));
+                            AuthorityUtils.createAuthorityList(usuario.getTipo()));
                 }else {
                     throw new UsernameNotFoundException("Não foi possível localizar o usuário" + usuario);
                 }
