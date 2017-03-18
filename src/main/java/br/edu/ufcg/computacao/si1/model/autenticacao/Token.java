@@ -12,7 +12,7 @@ import java.util.UUID;
 @Entity
 public class Token {
 
-	private final int HALF_HOUR_IN_MILISECONDS = 1800000;
+	private final int DIA_IN_MILISECONDS = 86400000;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class Token {
 
 	public Token(Usuario usuario){
 		expirationDate = new Date();
-		expirationDate.setTime(System.currentTimeMillis() + HALF_HOUR_IN_MILISECONDS);
+		expirationDate.setTime(System.currentTimeMillis() + DIA_IN_MILISECONDS);
 		key = UUID.randomUUID().toString();
 		this.usuario = usuario;
 	}

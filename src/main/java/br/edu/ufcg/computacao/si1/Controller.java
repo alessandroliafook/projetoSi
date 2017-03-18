@@ -42,6 +42,18 @@ public class Controller {
 	}
 
 	private boolean validarToken(String tokenKey){
-		return autenticacaoService.getToken(tokenKey) != null;
+
+		Token token = autenticacaoService.getToken(tokenKey);
+
+		if(token == null)
+			return false;
+
+		else if(token.getExpirationDate().getTime() < System.currentTimeMillis()) {
+			autenticacaoService.deleteToken(token);
+			return false;
+		}
+
+		else
+			return true;
 	}
 }
