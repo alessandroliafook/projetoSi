@@ -1,14 +1,14 @@
 package br.edu.ufcg.computacao.si1;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.autenticacao.Token;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.service.AnuncioService;
-import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -17,36 +17,33 @@ import java.util.List;
 public class Fachada {
 
 	@Autowired
-	AnuncioService anuncioService;
+	Controller controller;
 
-	@Autowired
-	UsuarioService usuarioService;
-	
-	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.GET)
-	public @ResponseBody Anuncio cadastrarAnuncio(Anuncio anuncio){
-		return anuncioService.getById(anuncio.get_id());
+	@RequestMapping(value = "/user/anuncio/listar", method = RequestMethod.GET)
+	public
+	@ResponseBody
+	List<Anuncio> listarAnuncios(String tokenKey) {
+		return controller.listarAnuncios(tokenKey);
 	}
 
-	@RequestMapping(value = "/user/listar/anuncios", method = RequestMethod.GET)
-	public @ResponseBody List<Anuncio> listarAnuncios(){
-		return anuncioService.getAll();
+	@RequestMapping(value = "/user/anuncio/cadastro", method = RequestMethod.POST)
+	public
+	@ResponseBody
+	Anuncio cadastroAnuncio(@Valid Anuncio anuncio, String tokenKey) {
+		return controller.cadastrarAnuncio(anuncio, tokenKey);
 	}
 
-	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.POST)
-	public @ResponseBody Anuncio  cadastroAnuncio(Anuncio anuncio){
-		 return anuncioService.create(anuncio);
+	@RequestMapping(value = "/usuario/cadastro", method = RequestMethod.POST)
+	public
+	@ResponseBody
+	Usuario cadastro(@Valid Usuario usuario) {
+		return controller.cadastroUsuario(usuario);
 	}
 
-
-	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.GET)
-	public @ResponseBody Usuario getPageCadastro(Usuario usuario){
-		return usuarioService.getById(usuario.getId());
+	@RequestMapping(value = "/autentication", method = RequestMethod.POST)
+	public
+	@ResponseBody
+	Token generateToken(String email, String senha) {
+		return controller.generateToken(email, senha);
 	}
-
-	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.POST)
-	public @ResponseBody Usuario cadastro(Usuario usuario){
-		return usuarioService.create(usuario);
-	}
-
-
 }

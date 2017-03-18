@@ -1,7 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import org.springframework.security.core.authority.AuthorityUtils;
-
 import javax.persistence.*;
 
 @Entity(name = "Usuario")
