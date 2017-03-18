@@ -4,13 +4,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
     
     $stateProvider.state('main', {
-            url: '/main',
-            templateUrl: '/views/main.html',
-            controller: 'MainController'
-        }).state('login', {
-            url: '/login',
-            templateUrl: '/views/login.html',
-            controller: 'LoginController'
+        url: '/main',
+        templateUrl: '/views/main.html',
+        controller: 'MainController'
+    }).state('login', {
+        url: '/login',
+        templateUrl: '/views/login.html',
+        controller: 'LoginController'
     }).state('anuncios', {
         url: '/anuncios',
         templateUrl: '/views/anuncios.html',
@@ -19,7 +19,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/cadastrarAnuncio',
         templateUrl: '/views/cadastrarAnuncio.html',
         controller: 'CadastroController'
-        });
+    }).state('cadastrarUsuario', {
+        url: '/cadastrarUsuario',
+        templateUrl: '/views/cadastrarUsuario.html',
+        controller: 'UsuarioController'
+    });
 });
 
 app.service('Auth',function($cookies, $state, $http) {

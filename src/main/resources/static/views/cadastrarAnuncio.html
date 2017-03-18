@@ -49,8 +49,10 @@
             </fieldset>
 
             <div layout="row" layout-align="space-around center">
-                <md-button class="md-raised md-primary">Cadastrar</md-button>
-                <md-button class="md-raised md-warn md-hue-2">Limpar</md-button>
+                <md-button class="md-raised md-primary" ng-click="cadastrarAnuncio()"
+                           ng-disabled="cadastroForm.$invalid || checkType()">Cadastrar
+                </md-button>
+                <md-button class="md-raised md-warn md-hue-2" ng-click="clearInput()">Limpar</md-button>
             </div>
         </md-content>
     </form>
