@@ -4,9 +4,9 @@ import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.autenticacao.Token;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,30 +20,46 @@ public class Fachada {
 	Controller controller;
 
 	@RequestMapping(value = "/user/anuncio/listar", method = RequestMethod.GET)
-	public
 	@ResponseBody
-	List<Anuncio> listarAnuncios(String tokenKey) {
-		return controller.listarAnuncios(tokenKey);
+	public ResponseEntity<List<Anuncio>> listarAnuncios(String tokenKey) {
+		List<Anuncio> lista = controller.listarAnuncios(tokenKey);
+
+		return (lista == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(lista, HttpStatus.ACCEPTED);
 	}
 
 	@RequestMapping(value = "/user/anuncio/cadastro", method = RequestMethod.POST)
-	public
 	@ResponseBody
-	Anuncio cadastroAnuncio(@Valid Anuncio anuncio, String tokenKey) {
-		return controller.cadastrarAnuncio(anuncio, tokenKey);
+	public ResponseEntity<Anuncio> cadastroAnuncio(@Valid Anuncio anuncio, String tokenKey) {
+		Anuncio anuncioSalvo = controller.cadastrarAnuncio(anuncio, tokenKey);
+
+		return (anuncioSalvo == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(anuncioSalvo, HttpStatus.ACCEPTED);
+
 	}
 
 	@RequestMapping(value = "/usuario/cadastro", method = RequestMethod.POST)
-	public
 	@ResponseBody
-	Usuario cadastro(@Valid Usuario usuario) {
-		return controller.cadastroUsuario(usuario);
+	public ResponseEntity<Usuario> cadastro(@Valid Usuario usuario) {
+
+		Usuario usuarioSalvo = controller.cadastroUsuario(usuario);
+
+		return (usuarioSalvo == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(usuarioSalvo, HttpStatus.ACCEPTED);
+
 	}
 
 	@RequestMapping(value = "/autentication", method = RequestMethod.POST)
-	public
 	@ResponseBody
-	Token generateToken(String email, String senha) {
-		return controller.generateToken(email, senha);
+	public ResponseEntity<String> generateToken(String email, String senha) {
+
+		Token token = controller.generateToken(email, senha);
+
+		return (token == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(token.getKey(), HttpStatus.ACCEPTED);
 	}
 }
