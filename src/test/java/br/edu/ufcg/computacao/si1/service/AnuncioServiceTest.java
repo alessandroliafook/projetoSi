@@ -1,7 +1,7 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Anuncio;
-import br.edu.ufcg.computacao.si1.model.Notas;
+import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -86,9 +86,9 @@ public class AnuncioServiceTest {
         assertNotNull(anuncioImovel);
         assertNotNull(anuncioEmprego);
 
-        assertEquals(anuncioMovel.getTipo(), "movel");
-        assertEquals(anuncioImovel.getTipo(), "imovel");
-        assertEquals(anuncioEmprego.getTipo(), "emprego");
+        assertEquals(anuncioMovel.getTipo(), TipoAnuncio.valueOf(String.valueOf("movel").toUpperCase()));
+        assertEquals(anuncioImovel.getTipo(), TipoAnuncio.valueOf(String.valueOf("imovel").toUpperCase()));
+        assertEquals(anuncioEmprego.getTipo(), TipoAnuncio.valueOf(String.valueOf("emprego").toUpperCase()));
 
         assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.get("movel").size());
         assertEquals(QTDE_ANUNCIOS_ESPERADA, anuncioService.get("imovel").size());
