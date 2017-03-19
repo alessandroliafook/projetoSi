@@ -8,7 +8,7 @@ app.service('UserFactory', function () {
     };
 
     var teste = function (nome, email, senha, tipo, id) {
-        this.nome= nome;
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.id = id;

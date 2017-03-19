@@ -1,4 +1,4 @@
-app.controller('CadastroController', function($http, $scope, $mdToast, $mdDialog, Auth) {
+app.controller('CadastroController', function ($http, $scope, AnuncioFactory) {
 
     var self = this;
 
@@ -21,10 +21,7 @@ app.controller('CadastroController', function($http, $scope, $mdToast, $mdDialog
     };
 
     $scope.checkType = function () {
-        Object.keys($scope.inputData.type).forEach(function (key) {
-            if ($scope.inputData.type[key]) return false;
-        });
-        return true;
+        return self.allFalse($scope.inputData.type);
     };
 
     $scope.clearInput = function () {
@@ -35,12 +32,16 @@ app.controller('CadastroController', function($http, $scope, $mdToast, $mdDialog
 
         var anuncio = AnuncioFactory.create($scope.inputData);
 
-        $http.post("/user/anuncio/cadastro", anuncio).success(function (data, status) {
-
-            console.log(data);
-
+        $http({
+            url: "/user/anuncio/cadastro",
+            data: anuncio,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).success(function (data, status) {
+            console.log(data + "\n" + status);
         }).error(function (err) {
-
             console.log(err);
         });
     };

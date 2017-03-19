@@ -38,11 +38,15 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
 
         $http({
             method: 'POST',
-            url: "http://localhost:8080/usuario/cadastro",
-            data: usuario
+            url: "/usuario/cadastro",
+            data: usuario,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
         }).success(function (data, status) {
 
-            console.log(data);
+            console.log(data + "\n" + status);
 
         }).error(function (err) {
 
