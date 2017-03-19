@@ -35,7 +35,7 @@ app.controller('CadastroController', function($http, $scope, $mdToast, $mdDialog
 
         var anuncio = AnuncioFactory.create($scope.inputData);
 
-        $http.post("/user/cadastrar/anuncio", anuncio).success(function (data, status) {
+        $http.post("/user/anuncio/cadastro", anuncio).success(function (data, status) {
 
             console.log(data);
 

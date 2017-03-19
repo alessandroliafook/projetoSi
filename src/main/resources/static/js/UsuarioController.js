@@ -36,7 +36,11 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
         var usuario = UserFactory.createUser($scope.inputData);
         console.log(usuario);
 
-        $http.post("/cadastrar-se", usuario).success(function (data, status) {
+        $http({
+            method: 'POST',
+            url: "http://localhost:8080/usuario/cadastro",
+            data: usuario
+        }).success(function (data, status) {
 
             console.log(data);
 

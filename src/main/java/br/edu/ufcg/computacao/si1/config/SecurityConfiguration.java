@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.si1.config;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
+import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +24,8 @@ import javax.sql.DataSource;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
-//    @Autowired
-//    DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -61,12 +62,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 //                .and()
 //                .withUser("company").password("password").roles("COMPANY");
 
-//
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery(
-//                        "select email as username,senha as password, true as enabled from tb_usuario where email=?")
-//                .authoritiesByUsernameQuery(
-//                        "select email as username, role from tb_usuario where email=?");
+
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery(
+                        "select email as username,senha as password, true as enabled from tb_usuario where email=?")
+                .authoritiesByUsernameQuery(
+                        "select email as username, role from tb_usuario where email=?");
     }
 
 //    @Autowired
@@ -76,22 +77,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 //            .passwordEncoder(new BasicEncoder());
 //    }
 //
-//    @Bean
-//    protected UserDetailsService userDetailsService(){
-//        return new UserDetailsService() {
-//            @Autowired
-//            UsuarioService usuarioService;
-//
-//            @Override
-//            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//                Usuario usuario = usuarioService.getByEmail(email).get();
-//                if(usuario != null){
-//                    return new User(usuario.getEmail(), usuario.getSenha(), true, true, true, true,
-//                            AuthorityUtils.createAuthorityList(usuario.getTipo()));
-//                }else {
-//                    throw new UsernameNotFoundException("Não foi possível localizar o usuário" + usuario);
-//                }
-//            }
-//        };
-//    }
+    @Bean
+    protected UserDetailsService userDetailsService(){
+        return new UserDetailsService() {
+            @Autowired
+            UsuarioService usuarioService;
+
+            @Override
+            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+                Usuario usuario = usuarioService.getByEmail(email);
+                if(usuario != null){
+                    return new User(usuario.getEmail(), usuario.getSenha(), true, true, true, true,
+                            AuthorityUtils.createAuthorityList(usuario.getTipo().toString()));
+                }else {
+                    throw new UsernameNotFoundException("Não foi possível localizar o usuário" + usuario);
+                }
+            }
+        };
+    }
 }

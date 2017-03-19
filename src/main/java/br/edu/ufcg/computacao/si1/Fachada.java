@@ -1,14 +1,14 @@
 package br.edu.ufcg.computacao.si1;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.autenticacao.Token;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
-import br.edu.ufcg.computacao.si1.service.AnuncioService;
-import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -17,36 +17,49 @@ import java.util.List;
 public class Fachada {
 
 	@Autowired
-	AnuncioService anuncioService;
+	Controller controller;
 
-	@Autowired
-	UsuarioService usuarioService;
-	
-	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.GET)
-	public @ResponseBody Anuncio cadastrarAnuncio(Anuncio anuncio){
-		return anuncioService.getById(anuncio.get_id());
+	@RequestMapping(value = "/user/anuncio/listar", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<Anuncio>> listarAnuncios(String tokenKey) {
+		List<Anuncio> lista = controller.listarAnuncios(tokenKey);
+
+		return (lista == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(lista, HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/user/listar/anuncios", method = RequestMethod.GET)
-	public @ResponseBody List<Anuncio> listarAnuncios(){
-		return anuncioService.getAll();
+	@RequestMapping(value = "/user/anuncio/cadastro", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Anuncio> cadastroAnuncio(@Valid Anuncio anuncio, String tokenKey) {
+		Anuncio anuncioSalvo = controller.cadastrarAnuncio(anuncio, tokenKey);
+
+		return (anuncioSalvo == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(anuncioSalvo, HttpStatus.ACCEPTED);
+
 	}
 
-	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.POST)
-	public @ResponseBody Anuncio  cadastroAnuncio(Anuncio anuncio){
-		 return anuncioService.create(anuncio);
+	@RequestMapping(value = "/usuario/cadastro", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<Usuario> cadastro(@Valid Usuario usuario) {
+
+		Usuario usuarioSalvo = controller.cadastroUsuario(usuario);
+
+		return (usuarioSalvo == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(usuarioSalvo, HttpStatus.ACCEPTED);
+
 	}
 
+	@RequestMapping(value = "/autentication", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> generateToken(String email, String senha) {
 
-	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.GET)
-	public @ResponseBody Usuario getPageCadastro(Usuario usuario){
-		return usuarioService.getById(usuario.getId());
+		Token token = controller.generateToken(email, senha);
+
+		return (token == null) ?
+				new ResponseEntity(HttpStatus.NON_AUTHORITATIVE_INFORMATION) :
+				new ResponseEntity<>(token.getKey(), HttpStatus.ACCEPTED);
 	}
-
-	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.POST)
-	public @ResponseBody Usuario cadastro(Usuario usuario){
-		return usuarioService.create(usuario);
-	}
-
-
 }

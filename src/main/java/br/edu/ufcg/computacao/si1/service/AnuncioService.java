@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class AnuncioService {
-    //TODO add validity checks
-
     @Autowired
     private AnuncioRepository anuncioRepository;
 
@@ -71,5 +69,9 @@ public class AnuncioService {
             return true;
         }
         return false;
+    }
+
+    public boolean exists(Anuncio anuncio) {
+        return anuncioRepository.exists(anuncio.get_id());
     }
 }
