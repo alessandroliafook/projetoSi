@@ -8,10 +8,7 @@ import br.edu.ufcg.computacao.si1.service.AutenticacaoService;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,25 +27,19 @@ public class ApplicationController {
 	@Autowired
 	AutenticacaoService autenticacaoService;
 	
-	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.GET)
-	public @ResponseBody Anuncio cadastrarAnuncio(Anuncio anuncio){
-		return anuncioService.getById(anuncio.get_id());
+	@RequestMapping(value = "/user/cadastrar/anuncio/{token}", method = RequestMethod.GET)
+	public @ResponseBody Anuncio cadastrarAnuncio(@RequestBody Anuncio anuncio, @PathVariable String token){
+		return (validarToken(token)) ? anuncioService.getById(anuncio.get_id()) : null;
 	}
 
-	@RequestMapping(value = "/user/listar/anuncios", method = RequestMethod.GET)
-	public @ResponseBody List<Anuncio> listarAnuncios(){
-		return anuncioService.getAll();
+	@RequestMapping(value = "/user/listar/anuncios/{token}", method = RequestMethod.GET)
+	public @ResponseBody List<Anuncio> listarAnuncios(@PathVariable String token){
+		return (validarToken(token)) ? anuncioService.getAll() : null;
 	}
 
-	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.POST)
-	public @ResponseBody Anuncio  cadastroAnuncio(Anuncio anuncio){
-		 return anuncioService.create(anuncio);
-	}
-
-
-	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.GET)
-	public @ResponseBody Usuario getPageCadastro(Usuario usuario){
-		return usuarioService.getById(usuario.getId());
+	@RequestMapping(value = "/user/cadastrar/anuncio/{token}", method = RequestMethod.POST)
+	public @ResponseBody Anuncio  cadastroAnuncio(@RequestBody Anuncio anuncio, @PathVariable String token){
+		 return (validarToken(token)) ? anuncioService.create(anuncio) : null;
 	}
 
 	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.POST)
