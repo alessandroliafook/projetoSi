@@ -3,8 +3,8 @@ app.service('UserFactory', function () {
     var self = this;
 
     self.getTipo = function (userData) {
-        if (userData.type['FISICA']) return 'FISICA';
-        else return 'JURIDICA';
+        if (userData.type['FISICO']) return 'FISICO';
+        else return 'JURIDICO';
     };
 
     var teste = function (nome, email, senha, tipo, id) {

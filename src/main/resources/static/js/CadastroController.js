@@ -2,7 +2,7 @@ app.controller('CadastroController', function ($http, $scope, AnuncioFactory) {
 
     var self = this;
 
-    self.inputDataModel = {title: "", price: undefined, type: {'Movel': false, 'Imovel': false, 'Emprego': false}};
+    self.inputDataModel = {title: "", price: undefined, type: {'MOVEL': false, 'IMOVEL': false, 'EMPREGO': false}};
     $scope.inputData = angular.copy(self.inputDataModel);
 
     $scope.isDisabled = function (typeKey) {

@@ -6,7 +6,7 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
         email: "",
         password: "",
         repeatPassword: "",
-        type: {FISICA: false, JURIDICA: false}
+        type: {FISICO: false, JURIDICO: false}
     };
     $scope.inputData = angular.copy($scope.inputDataModel);
 
@@ -24,7 +24,7 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
     };
 
     self.checkType = function () {
-        return (!$scope.inputData.type['FISICA'] && !$scope.inputData.type['JURIDICA']);
+        return (!$scope.inputData.type['FISICO'] && !$scope.inputData.type['JURIDICO']);
     };
 
     $scope.clearInput = function () {
@@ -38,7 +38,7 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
 
         $http({
             method: 'POST',
-            url: "/usuario/cadastro",
+            url: "/cadastrar-se",
             data: usuario,
             headers: {
                 'Content-Type': 'application/json',

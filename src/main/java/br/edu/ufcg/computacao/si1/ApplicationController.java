@@ -7,6 +7,7 @@ import br.edu.ufcg.computacao.si1.service.AnuncioService;
 import br.edu.ufcg.computacao.si1.service.AutenticacaoService;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,12 +43,14 @@ public class ApplicationController {
 	}
 
 	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.POST)
-	public @ResponseBody Usuario cadastro(Usuario usuario){
-		return usuarioService.create(usuario);
+    public
+    @ResponseBody
+    Usuario cadastro(@RequestBody Usuario usuario) {
+        return usuarioService.create(usuario);
 	}
 
-	@RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.GET)
-	public @ResponseBody String autenticacao(@PathVariable String email, @PathVariable String senha){
+    @RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String autenticacao(@PathVariable String email, @PathVariable String senha){
 
 		Usuario usuario = usuarioService.getUsuarioByEmailAndSenha(email, senha);
 		Token token = null;
@@ -55,8 +58,10 @@ public class ApplicationController {
 		if (usuario != null)
 			token = autenticacaoService.generateToken(usuario);
 
-		return (token != null) ? token.getKey() : null;
-	}
+        if (token != null) System.out.println(token.getKey());
+
+        return (token != null) ? token.getKey() : "";
+    }
 
 	private boolean validarToken(String tokenKey){
 

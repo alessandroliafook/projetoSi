@@ -24,6 +24,13 @@ public class Usuario {
         this.tipo = tipoUsuario;
     }
 
+    public Usuario() {
+        this.nome = "default";
+        this.email = "default@default";
+        this.senha = "12345678";
+        this.tipo = TipoUsuario.FISICO;
+    }
+
     public Long getId() {
         return id;
     }

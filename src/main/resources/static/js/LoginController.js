@@ -1,16 +1,27 @@
-app.controller('LoginController', function($http, $scope, $mdToast, $mdDialog, Auth) {
+app.controller('LoginController', function ($http, $scope, $mdToast, $mdDialog, $state, Auth) {
 
 	$scope.estaLogando = false;
 
 	$scope.login = function(usuario) {
         $scope.estaLogando = true;
-        $http.post("/autenticacao/", usuario).success(function(data, status) {
-            if (status == 202) {
-                Auth.saveToken(data.token);
-                $state.go('main');
-            } else if (status == 203) {
+        console.log(usuario.login + " senha = " + usuario.senha);
+        $http({
+            method: 'GET',
+            url: '/autenticacao/' + usuario.login + "/" + usuario.senha,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'text/plain'
+            }
+        }).success(function (data, status) {
+
+            if (data.length == 0) {
                 $scope.dadosIncorretos = true;
+                confirm("Dados incorretos. Tente novamente");
                 $scope.user = {}
+            } else {
+                Auth.saveToken(data);
+                confirm("Login realizado. Ok para ser redirecionado.");
+                $state.go('main');
             }
             $scope.estaLogando = false;
         }).error(function(err){
@@ -22,13 +33,12 @@ app.controller('LoginController', function($http, $scope, $mdToast, $mdDialog, A
 	$scope.autenticacao = function () {
 
         $http({
-
             method: "GET",
             url: "/autenticacao"
 
         }).then(function(response) {
             console.log(response.data);
-        })
+        });
         console.log("por aqui!!")
 
     };
