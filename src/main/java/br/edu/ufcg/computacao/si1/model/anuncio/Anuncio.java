@@ -30,7 +30,7 @@ public class Anuncio {
     @Column(name = "data_criacao", nullable = false)
     private Date dataDeCriacao;
 
-    @DecimalMin(value = "0.01", message = "Nota não pode ser menor que 0.01")
+    @DecimalMin(value = "0.01", message = "Preco não pode ser menor que 0.01")
     @Column(name = "preco", nullable = false)
     private double preco;
 
