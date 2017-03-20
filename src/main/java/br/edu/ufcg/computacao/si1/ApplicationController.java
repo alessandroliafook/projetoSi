@@ -1,15 +1,14 @@
 package br.edu.ufcg.computacao.si1;
 
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.autenticacao.Token;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.AnuncioService;
+import br.edu.ufcg.computacao.si1.service.AutenticacaoService;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,13 +19,16 @@ import java.util.List;
  * Created by Alessandro Fook on 17/03/2017.
  */
 @Controller
-public class Fachada {
+public class ApplicationController {
 
 	@Autowired
 	AnuncioService anuncioService;
 
 	@Autowired
 	UsuarioService usuarioService;
+
+	@Autowired
+	AutenticacaoService autenticacaoService;
 	
 	@RequestMapping(value = "/user/cadastrar/anuncio", method = RequestMethod.GET)
 	public @ResponseBody Anuncio cadastrarAnuncio(Anuncio anuncio){
@@ -54,18 +56,31 @@ public class Fachada {
 		return usuarioService.create(usuario);
 	}
 
+	@RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.GET)
+	public @ResponseBody String autenticacao(@PathVariable String email, @PathVariable String senha){
 
-	@RequestMapping(value = "/autenticacao", method = RequestMethod.GET)
-	public @ResponseBody String autenticacao(){
-		System.out.println("Passei!");
-		return "ola";
+		Usuario usuario = usuarioService.getUsuarioByEmailAndSenha(email, senha);
+		Token token = null;
+
+		if (usuario != null)
+			token = autenticacaoService.generateToken(usuario);
+
+		return token.getKey();
 	}
 
-	@RequestMapping("/test")
-	public String ola(){
-		System.out.println("passei!");
-		return"passei!";
+	private boolean validarToken(String tokenKey){
+
+		Token token = autenticacaoService.getTokenByKey(tokenKey);
+
+		if(token == null)
+			return false;
+
+		else if(token.getExpirationDate().getTime() < System.currentTimeMillis()) {
+			autenticacaoService.deleteToken(token);
+			return false;
+		}
+
+		else
+			return true;
 	}
-
-
 }

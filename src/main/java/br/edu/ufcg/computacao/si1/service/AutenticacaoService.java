@@ -3,17 +3,15 @@ package br.edu.ufcg.computacao.si1.service;
 import br.edu.ufcg.computacao.si1.model.autenticacao.Token;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.TokenRepository;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Alessandro Fook on 18/03/2017.
  */
+@Service
 public class AutenticacaoService {
 
 	TokenRepository repository;
-
-	public Token getToken(String key){
-		return repository.findByKey(key);
-	}
 
 	public Token saveToken(Token token) {
 		return repository.save(token);
@@ -23,8 +21,10 @@ public class AutenticacaoService {
 		repository.delete(token);
 	}
 
-	public Token findTokenByKey(String key) {
+	public Token getTokenByKey(String key) {
 		return repository.findByKey(key);
 	}
+
+	public Token generateToken(Usuario usuario) {return new Token(usuario);}
 
 }
