@@ -1,0 +1,27 @@
+<md-toolbar class="md-hue-2">
+  <div class="md-toolbar-tools">
+    <h2 flex md-truncate>$ ad-extreme</h2>
+  </div>
+</md-toolbar>
+
+
+<md-content id="login">
+	<form name="loginForm">
+		<md-content md-theme="docs-dark" id="login-form" class="md-no-momentum">
+		    <md-input-container class="md-block">
+		      <md-icon><i class="material-icons">person</i></md-icon>
+		      <input ng-model="user.login" type="text" placeholder="Login" ng-required="true">
+		      </md-input-container>
+		      <md-input-container class="md-block">
+		      <md-icon class="password"><i class="material-icons">vpn_key</i></md-icon>
+		      <input ng-model="user.senha" type="password" placeholder="Senha" ng-required="true">
+		    </md-input-container>
+
+		    <h4 class="md-primary" ng-show="dadosIncorretos">Os dados não correspondem a um usuário cadastrado</h4>
+
+		    <md-button class="button-right md-raised md-primary" ng-disabled="loginForm.$invalid" ng-click="login(user)">Entrar</md-button>
+
+		    <md-progress-circular class="progress-login" ng-show="estaLogando" md-diameter="25px"></md-progress-circular>
+		</md-content>
+	</form>
+</md-content>

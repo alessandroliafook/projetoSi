@@ -1,7 +1,5 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import org.springframework.security.core.authority.AuthorityUtils;
-
 import javax.persistence.*;
 
 @Entity(name = "Usuario")
@@ -24,6 +22,13 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.tipo = tipoUsuario;
+    }
+
+    public Usuario() {
+        this.nome = "default";
+        this.email = "default@default";
+        this.senha = "12345678";
+        this.tipo = TipoUsuario.FISICO;
     }
 
     public Long getId() {

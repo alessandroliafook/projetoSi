@@ -1,0 +1,60 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools" layout="row">
+
+        <h2 flex md-truncate>$ ad-extreme</h2>s
+
+    </div>
+</md-toolbar>
+
+
+<md-content id="cadastro">
+    <form name="cadastroForm" layout="column">
+        <md-content class="md-no-momentum" id="cadastro-form">
+
+            <h2 class="text-center" layout="row" layout-align="space-around center">Cadastrar Usuário</h2>
+
+            <md-input-container class="md-block" layout="row">
+                <md-icon><i class="material-icons">account_circle</i></md-icon>
+                <input ng-model="inputData.name" type="text" placeholder="Nome" ng-required="true">
+            </md-input-container>
+
+            <md-input-container class="md-block" layout="row">
+                <md-icon><i class="material-icons">mail_outline</i></md-icon>
+                <input ng-model="inputData.email" type="email" placeholder="Email" ng-required="true">
+            </md-input-container>
+
+            <md-input-container>
+                <md-icon><i class="material-icons">security</i></md-icon>
+                <input ng-model="inputData.password" type="password" placeholder="Senha" ng-required="true">
+            </md-input-container>
+
+            <md-input-container>
+                <md-icon><i class="material-icons">security</i></md-icon>
+                <input ng-model="inputData.repeatPassword" type="password" placeholder="Repita a senha"
+                       ng-required="true">
+            </md-input-container>
+
+            <h4 class="md-primary" ng-show="checkPassword()">As senhas são diferentes!</h4>
+
+            <fieldset class="standard" layout="row" layout-align="space-around center">
+                <legend>Escolha um tipo</legend>
+
+                <md-checkbox ng-model="inputData.type['FISICO']" ng-disabled="inputData.type['JURIDICO']">
+                    Pessoa Física
+                </md-checkbox>
+
+                <md-checkbox ng-model="inputData.type['JURIDICO']" ng-disabled="inputData.type['FISICO']">
+                    Pessoa Jurídica
+                </md-checkbox>
+
+            </fieldset>
+
+            <div layout="row" layout-align="space-around center">
+                <md-button role="submit" class="md-raised md-primary" ng-disabled="checkData() || cadastroForm.$invalid"
+                           ng-click="cadastrar()">Cadastrar
+                </md-button>
+                <md-button class="md-raised md-warn md-hue-2" ng-click="clearInput()">Limpar</md-button>
+            </div>
+        </md-content>
+    </form>
+</md-content>
