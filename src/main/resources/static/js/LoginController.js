@@ -18,5 +18,18 @@ app.controller('LoginController', function($http, $scope, $mdToast, $mdDialog, A
             console.log(err);
         });
     };
-    
+
+	$scope.autenticacao = function () {
+
+        $http({
+
+            method: "GET",
+            url: "/autenticacao"
+
+        }).then(function(response) {
+            console.log(response.data);
+        })
+        console.log("por aqui!!")
+
+    };
 });

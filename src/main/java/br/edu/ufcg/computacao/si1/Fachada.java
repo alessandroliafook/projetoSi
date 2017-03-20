@@ -5,6 +5,11 @@ import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.AnuncioService;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +19,7 @@ import java.util.List;
 /**
  * Created by Alessandro Fook on 17/03/2017.
  */
+@Controller
 public class Fachada {
 
 	@Autowired
@@ -46,6 +52,19 @@ public class Fachada {
 	@RequestMapping(value = "/cadastrar-se", method = RequestMethod.POST)
 	public @ResponseBody Usuario cadastro(Usuario usuario){
 		return usuarioService.create(usuario);
+	}
+
+
+	@RequestMapping(value = "/autenticacao", method = RequestMethod.GET)
+	public @ResponseBody String autenticacao(){
+		System.out.println("Passei!");
+		return "ola";
+	}
+
+	@RequestMapping("/test")
+	public String ola(){
+		System.out.println("passei!");
+		return"passei!";
 	}
 
 

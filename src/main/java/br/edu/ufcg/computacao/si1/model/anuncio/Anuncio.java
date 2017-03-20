@@ -24,7 +24,6 @@ public class Anuncio {
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
-    @DecimalMin(value = "0.1", message = "O preço do anúncio não pode ser menor que 0.1")
     @Column(name = "data_criacao", nullable = false)
     private Date dataDeCriacao;
 
