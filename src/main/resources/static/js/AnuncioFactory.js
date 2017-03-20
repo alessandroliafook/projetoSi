@@ -14,7 +14,14 @@ app.service('AnuncioFactory', function () {
             var type = self.getTipo(userData);
             var currentDate = new Date();
 
-            return {titulo: userData.title, preco: userData.price, tipo: type, nota: 0.0, dataDeCriacao: currentDate}
+            return {
+                titulo: userData.title,
+                preco: userData.price,
+                tipo: type,
+                nota: 0.0,
+                dataDeCriacao: currentDate,
+                _id: 0
+            }
         }
 
     }

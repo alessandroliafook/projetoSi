@@ -31,6 +31,9 @@ public class Token {
 		this.usuario = usuario;
 	}
 
+    public Token() {
+    }
+
 	public String getKey() {
 		return key;
 	}

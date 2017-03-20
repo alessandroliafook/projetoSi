@@ -3,6 +3,7 @@ package br.edu.ufcg.computacao.si1.service;
 import br.edu.ufcg.computacao.si1.model.autenticacao.Token;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.TokenRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AutenticacaoService {
 
+	@Autowired
 	TokenRepository repository;
 
 	public Token saveToken(Token token) {
@@ -25,6 +27,8 @@ public class AutenticacaoService {
 		return repository.findByKey(key);
 	}
 
-	public Token generateToken(Usuario usuario) {return new Token(usuario);}
+	public Token generateToken(Usuario usuario) {
+		return saveToken(new Token(usuario));
+	}
 
 }

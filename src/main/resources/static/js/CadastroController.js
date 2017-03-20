@@ -1,4 +1,4 @@
-app.controller('CadastroController', function ($http, $scope, AnuncioFactory) {
+app.controller('CadastroController', function ($http, $scope, AnuncioFactory, Auth) {
 
     var self = this;
 
@@ -33,7 +33,8 @@ app.controller('CadastroController', function ($http, $scope, AnuncioFactory) {
         var anuncio = AnuncioFactory.create($scope.inputData);
 
         $http({
-            url: "/user/anuncio/cadastro",
+            method: "POST",
+            url: "/user/cadastrar/anuncio/" + Auth.getToken(),
             data: anuncio,
             headers: {
                 'Content-Type': 'application/json',
