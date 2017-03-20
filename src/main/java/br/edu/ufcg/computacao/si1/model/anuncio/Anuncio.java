@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.si1.model.anuncio;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -22,11 +24,13 @@ public class Anuncio {
     private Long _id;
 
     @Column(name = "titulo", nullable = false)
+    @NotEmpty(message = "O título não pode ser vazio")
     private String titulo;
 
     @Column(name = "data_criacao", nullable = false)
     private Date dataDeCriacao;
 
+    @DecimalMin(value = "0.01", message = "Nota não pode ser menor que 0.01")
     @Column(name = "preco", nullable = false)
     private double preco;
 
@@ -38,12 +42,12 @@ public class Anuncio {
     @Column(name = "tipo", nullable = false)
     private TipoAnuncio tipo;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double preco, double nota, String tipo) {
+    public Anuncio(String titulo, Date dataDeCriacao, double preco, double nota, TipoAnuncio tipo) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.preco = preco;
         this.nota = nota;
-        this.tipo = TipoAnuncio.valueOf(tipo.toUpperCase());
+        this.tipo = tipo;
     }
 
     public Anuncio() {
@@ -105,8 +109,8 @@ public class Anuncio {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = TipoAnuncio.valueOf(tipo.toUpperCase());
+    public void setTipo(TipoAnuncio tipo) {
+        this.tipo = tipo;
     }
 
     @Override
