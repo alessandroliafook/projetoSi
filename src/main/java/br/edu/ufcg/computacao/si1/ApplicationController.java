@@ -7,7 +7,6 @@ import br.edu.ufcg.computacao.si1.service.AnuncioService;
 import br.edu.ufcg.computacao.si1.service.AutenticacaoService;
 import br.edu.ufcg.computacao.si1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * Created by Alessandro Fook on 17/03/2017.
  */
-@Controller
+@RestController
 public class ApplicationController {
 
 	@Autowired
@@ -56,7 +55,7 @@ public class ApplicationController {
 		if (usuario != null)
 			token = autenticacaoService.generateToken(usuario);
 
-		return token.getKey();
+		return (token != null) ? token.getKey() : null;
 	}
 
 	private boolean validarToken(String tokenKey){
