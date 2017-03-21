@@ -39,7 +39,8 @@ public class Fachada {
 		return administrador.cadastro(usuario);
 	}
 
-	@RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+	@RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.POST, produces = MediaType
+			.TEXT_PLAIN_VALUE)
 	public
 	@ResponseBody
 	String autenticacao(@PathVariable String email, @PathVariable String senha) {

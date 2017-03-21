@@ -6,7 +6,7 @@ app.controller('LoginController', function ($http, $scope, $mdToast, $mdDialog, 
         $scope.estaLogando = true;
         console.log(usuario.login + " senha = " + usuario.senha);
         $http({
-            method: 'GET',
+            method: 'POST',
             url: '/autenticacao/' + usuario.login + "/" + usuario.senha,
             headers: {
                 'Content-Type': 'application/json',
