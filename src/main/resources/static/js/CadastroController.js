@@ -34,7 +34,7 @@ app.controller('CadastroController', function ($http, $scope, AnuncioFactory, Au
 
         $http({
             method: "POST",
-            url: "/user/cadastrar/anuncio/" + Auth.getToken(),
+            url: "/usuario/anuncio/" + Auth.getToken(),
             data: anuncio,
             headers: {
                 'Content-Type': 'application/json',

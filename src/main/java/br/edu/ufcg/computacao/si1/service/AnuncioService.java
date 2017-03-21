@@ -4,13 +4,10 @@ import br.edu.ufcg.computacao.si1.model.anuncio.TipoAnuncio;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.repository.AnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -50,7 +47,7 @@ public class AnuncioService {
 
     public boolean update(Anuncio anuncio) {
         /*a atualizacao do anuncio eh feita apenas se o anuncio ja existir*/
-        if (anuncioRepository.exists(anuncio.get_id())) {
+        if (anuncioRepository.exists(anuncio.getId())) {
             anuncioRepository.save(anuncio);
             return true;
         }
@@ -70,7 +67,7 @@ public class AnuncioService {
     }
 
     public boolean exists(Anuncio anuncio) {
-        return anuncioRepository.exists(anuncio.get_id());
+        return anuncioRepository.exists(anuncio.getId());
     }
 
     public AnuncioRepository getAnuncioRepository(){

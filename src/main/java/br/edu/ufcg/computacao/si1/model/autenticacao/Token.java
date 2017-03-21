@@ -9,7 +9,8 @@ import java.util.UUID;
 /**
  * Created by Alessandro Fook on 18/03/2017.
  */
-@Entity
+@Entity(name = "Token")
+@Table(name = "tb_token")
 public class Token {
 
 	private final int DIA_IN_MILISECONDS = 86400000;
@@ -21,14 +22,14 @@ public class Token {
 	private String key;
 	@Column
 	private Date expirationDate;
-	@OneToOne
-	private Usuario usuario;
+	@Column(unique = true)
+	private Long usuarioId;
 
-	public Token(Usuario usuario){
-		expirationDate = new Date();
-		expirationDate.setTime(System.currentTimeMillis() + DIA_IN_MILISECONDS);
-		key = UUID.randomUUID().toString();
-		this.usuario = usuario;
+	public Token(Long usuarioId){
+		setExpirationDate(new Date());
+		getExpirationDate().setTime(System.currentTimeMillis() + DIA_IN_MILISECONDS);
+		setKey(UUID.randomUUID().toString());
+		setUusuarioId(usuarioId);
 	}
 
     public Token() {
@@ -58,11 +59,11 @@ public class Token {
 		this.expirationDate = expirationDate;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Long getUsuarioId() {
+		return usuarioId;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUusuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 }

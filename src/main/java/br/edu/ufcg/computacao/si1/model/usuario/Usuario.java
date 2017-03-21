@@ -1,20 +1,31 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column
+    @NotEmpty(message = "O nome não pode ser vazio")
     private String nome;
+
     @Column(unique = true)
+    @NotEmpty(message = "O email não pode ser vazio")
     private String email;
+
     @Column
+    @Size(min = 8, message = "A senha não pode conter menos de 8 caracteres")
     private String senha;
-    @Column
+
+    @Column(nullable = false)
     private TipoUsuario tipo;
 
     public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario) {

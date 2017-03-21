@@ -38,7 +38,7 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
 
         $http({
             method: 'POST',
-            url: "/cadastrar-se",
+            url: "/usuario/cadastro",
             data: usuario,
             headers: {
                 'Content-Type': 'application/json',

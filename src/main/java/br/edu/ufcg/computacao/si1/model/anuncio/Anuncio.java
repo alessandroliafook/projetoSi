@@ -20,8 +20,8 @@ public class Anuncio {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "_id", nullable = false, unique = true)
-    private Long _id;
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
 
     @Column(name = "titulo", nullable = false)
     @NotEmpty(message = "O título não pode ser vazio")
@@ -62,15 +62,15 @@ public class Anuncio {
      * Retorna o id do anuncio
      * @return o id do anuncio
      */
-    public Long get_id() {
-        return _id;
+    public Long getId() {
+        return id;
     }
 
     /**
      * Modifica o id do anuncio
-     * @param _id id a ser colocado no anuncio
-     */public void set_id(Long _id) {
-        this._id = _id;
+     * @param id id a ser colocado no anuncio
+     */public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -121,7 +121,7 @@ public class Anuncio {
         Anuncio anuncio = (Anuncio) o;
 
         if (Double.compare(anuncio.getPreco(), getPreco()) != 0) return false;
-        if (!get_id().equals(anuncio.get_id())) return false;
+        if (!getId().equals(anuncio.getId())) return false;
         if (!getTitulo().equals(anuncio.getTitulo())) return false;
         if (!getDataDeCriacao().equals(anuncio.getDataDeCriacao())) return false;
         if (Double.compare(anuncio.getNota(), getNota()) != 0) return false;
@@ -133,7 +133,7 @@ public class Anuncio {
     public int hashCode() {
         int result;
         long temp;
-        result = get_id().hashCode();
+        result = getId().hashCode();
         result = 31 * result + getTitulo().hashCode();
         result = 31 * result + getDataDeCriacao().hashCode();
         temp = Double.doubleToLongBits(getPreco());
@@ -147,7 +147,7 @@ public class Anuncio {
     @Override
     public String toString() {
         return "Anuncio{" +
-                "_id=" + _id +
+                "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", dataDeCriacao=" + getDataDeCriacao() +
                 ", preco=" + preco +

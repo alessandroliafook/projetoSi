@@ -15,10 +15,6 @@ public class AutenticacaoService {
 	@Autowired
 	TokenRepository repository;
 
-	public Token saveToken(Token token) {
-		return repository.save(token);
-	}
-
 	public void deleteToken(Token token) {
 		repository.delete(token);
 	}
@@ -27,8 +23,10 @@ public class AutenticacaoService {
 		return repository.findByKey(key);
 	}
 
-	public Token generateToken(Usuario usuario) {
-		return saveToken(new Token(usuario));
+	public Token getTokenByUsuarioId(Long usuarioId){return repository.findByUsuarioId(usuarioId);}
+
+	public Token generateToken(Long usuarioId) {
+		return repository.save(new Token(usuarioId));
 	}
 
 }
