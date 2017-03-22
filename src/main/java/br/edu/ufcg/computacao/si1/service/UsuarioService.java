@@ -10,50 +10,50 @@ import java.util.List;
 @Service
 public class UsuarioService {
 
-    private UsuarioRepository usuarioRepository;
-
     @Autowired
-    public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    private UsuarioRepository repository;
+
+    public void setRepository(UsuarioRepository repository) {
+        this.repository = repository;
     }
 
     public Usuario create(Usuario usuario) {
         System.out.println(usuario + "estah sendo criado");
-        return usuarioRepository.save(usuario);
+        return repository.save(usuario);
     }
 
     public Usuario getById(Long id) {
-        return usuarioRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public Usuario getByEmail(String email) {
         System.out.println(email + "estah sendo retornado");
-        return usuarioRepository.findByEmail(email);
+        return repository.findByEmail(email);
     }
 
     public List<Usuario> getAll() {
-        return usuarioRepository.findAll();
+        return repository.findAll();
     }
 
     public boolean update(Usuario usuario) {
         System.out.println(usuario + "estah sendo atualizado");
 
-        if (usuarioRepository.exists(usuario.getId())) {
-            usuarioRepository.save(usuario);
+        if (repository.exists(usuario.getId())) {
+            repository.save(usuario);
             return true;
         }
         return false;
     }
 
     public boolean delete(Long id) {
-        if (usuarioRepository.exists(id)) {
-            usuarioRepository.delete(id);
+        if (repository.exists(id)) {
+            repository.delete(id);
             return true;
         }
         return false;
     }
 
     public Usuario getUsuarioByEmailAndSenha(String email, String senha){
-        return usuarioRepository.findByEmailAndSenha(email, senha);
+        return repository.findByEmailAndSenha(email, senha);
     }
 }

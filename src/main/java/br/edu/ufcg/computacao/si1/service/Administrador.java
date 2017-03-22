@@ -32,7 +32,8 @@ public class Administrador {
 	}
 
 	public Usuario cadastro(Usuario usuario) {
-		return usuarioService.create(usuario);
+		Usuario novoUsuario = usuarioService.create(usuario);
+		return (novoUsuario != null) ? novoUsuario.copiaSemSenha() : null;
 	}
 
 	public String autenticacao(String email, String senha) {

@@ -17,24 +17,24 @@ import java.util.stream.Collectors;
 public class AnuncioService {
 
     @Autowired
-    private AnuncioRepository anuncioRepository;
+    private AnuncioRepository repository;
 
     public Anuncio create(Anuncio anuncio) {
         /*aqui salvamos o anuncio recem criado no repositorio jpa*/
-        return anuncioRepository.save(anuncio);
+        return repository.save(anuncio);
     }
 
 
     public Anuncio getById(Long id) {
         /*aqui recuperamos o anuncio pelo seu id*/
-        return anuncioRepository.findOne(id);
+        return repository.findOne(id);
     }
 
     public List<Anuncio> get(String tipo) {
 
         /*pegamos aqui todos os anuncios, mas retornamos os anuncios por tipo
         * filtrando o tipo, pelo equals, retornando um arrayLista*/
-        return anuncioRepository.findAll().stream()
+        return repository.findAll().stream()
                 .filter(anuncio -> anuncio.getTipo().equals(TipoAnuncio.valueOf(tipo.toUpperCase())))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -42,13 +42,13 @@ public class AnuncioService {
     public List<Anuncio> getAll() {
         /*aqui retornamos todos os anuncios, sem distincao*/
 
-        return anuncioRepository.findAll();
+        return repository.findAll();
     }
 
     public boolean update(Anuncio anuncio) {
         /*a atualizacao do anuncio eh feita apenas se o anuncio ja existir*/
-        if (anuncioRepository.exists(anuncio.getId())) {
-            anuncioRepository.save(anuncio);
+        if (repository.exists(anuncio.getId())) {
+            repository.save(anuncio);
             return true;
         }
         return false;
@@ -59,18 +59,18 @@ public class AnuncioService {
         /*aqui se apaga o anuncio se ele existir*/
 
 
-        if (anuncioRepository.exists(id)) {
-            anuncioRepository.delete(id);
+        if (repository.exists(id)) {
+            repository.delete(id);
             return true;
         }
         return false;
     }
 
     public boolean exists(Anuncio anuncio) {
-        return anuncioRepository.exists(anuncio.getId());
+        return repository.exists(anuncio.getId());
     }
 
-    public AnuncioRepository getAnuncioRepository(){
-        return this.anuncioRepository;
+    public AnuncioRepository getRepository(){
+        return this.repository;
     }
 }
