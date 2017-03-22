@@ -1,7 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
 import br.edu.ufcg.computacao.si1.model.autenticacao.Token;
-import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +14,17 @@ public class AutenticacaoService {
 	@Autowired
 	TokenRepository repository;
 
-	public void deleteToken(Token token) {
+	public void deletarToken(Token token) {
 		repository.delete(token);
 	}
 
-	public Token getTokenByKey(String key) {
-		return repository.findByKey(key);
+	public Token getTokenByChave(String chave) {
+		return repository.findByChave(chave);
 	}
 
 	public Token getTokenByUsuarioId(Long usuarioId){return repository.findByUsuarioId(usuarioId);}
 
-	public Token generateToken(Long usuarioId) {
+	public Token generarToken(Long usuarioId) {
 		return repository.save(new Token(usuarioId));
 	}
 

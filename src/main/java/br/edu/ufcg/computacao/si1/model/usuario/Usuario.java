@@ -3,7 +3,10 @@ package br.edu.ufcg.computacao.si1.model.usuario;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Usuario")
 @Table(name = "tb_usuario")
@@ -28,11 +31,22 @@ public class Usuario {
     @Column(nullable = false)
     private TipoUsuario tipo;
 
-    public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario) {
+    @Column
+    @DecimalMin(value = "0.0")
+    private double saldo;
+
+    @OneToMany
+    @Column(name = "id_anuncios")
+    private List<Long> IdsAnuncios;
+
+    public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario, double saldo,  List<Long>
+            IdsAnuncios) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.tipo = tipoUsuario;
+        this.saldo = saldo;
+        this.IdsAnuncios = IdsAnuncios;
     }
 
     public Usuario() {
@@ -40,6 +54,8 @@ public class Usuario {
         this.email = "default@default";
         this.senha = "12345678";
         this.tipo = TipoUsuario.FISICO;
+        this.saldo = 0d;
+        this.IdsAnuncios = new ArrayList<>();
     }
 
     public Long getId() {
@@ -54,8 +70,8 @@ public class Usuario {
         return nome;
     }
 
-    public void setNome(String n) {
-        this.nome = n;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -82,4 +98,39 @@ public class Usuario {
         this.tipo = tipoUsuario;
     }
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public List<Long> getIdsAnuncios() {
+        return IdsAnuncios;
+    }
+
+    public void setIdsAnuncios(List<Long> idsAnuncios) {
+        this.IdsAnuncios = idsAnuncios;
+    }
+
+    public Usuario copiaSemSenha() {
+        return new Usuario(getNome(), getEmail(), "", getTipo(), getSaldo(), getIdsAnuncios());
+    }
+
+    public boolean cadastrarAnuncio(Long idAnuncio){
+        return getIdsAnuncios().add(idAnuncio);
+    }
+
+    public boolean deletarAnuncio(Long idAnuncio) {
+        return getIdsAnuncios().remove(idAnuncio);
+    }
+
+    public void realizarCompra(double preco) {
+        setSaldo(getSaldo() - preco);
+    }
+
+    public void realizarVenda(double preco){
+        setSaldo(getSaldo() + preco);
+    }
 }

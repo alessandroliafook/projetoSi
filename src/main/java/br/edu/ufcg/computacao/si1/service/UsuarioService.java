@@ -56,4 +56,8 @@ public class UsuarioService {
     public Usuario getUsuarioByEmailAndSenha(String email, String senha){
         return repository.findByEmailAndSenha(email, senha);
     }
+
+    public void adicionarAnuncio(Usuario usuario, Long anuncioId) {
+        usuario.cadastrarAnuncio(anuncioId);
+    }
 }

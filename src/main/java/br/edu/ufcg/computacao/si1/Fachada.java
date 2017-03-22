@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1;
 
+import br.edu.ufcg.computacao.si1.model.Notificacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.Administrador;
@@ -18,25 +19,61 @@ public class Fachada {
 	@Autowired
 	Administrador administrador;
 
-	@RequestMapping(value = "/usuario/anuncio/{token}", method = RequestMethod.POST)
+	@RequestMapping(value = "/usuario/anuncio", method = RequestMethod.POST)
 	public
 	@ResponseBody
-	Anuncio cadastrarAnuncio(@RequestBody Anuncio anuncio, @PathVariable String token) {
+	Anuncio cadastrarAnuncio(@RequestBody Anuncio anuncio, @RequestHeader String token) {
 		return administrador.cadastrarAnuncio(anuncio, token);
 	}
 
-	@RequestMapping(value = "/usuario/anuncio/listar/{token}", method = RequestMethod.GET)
+	@RequestMapping(value = "/anuncio/listar", method = RequestMethod.GET)
 	public
 	@ResponseBody
-	List<Anuncio> listarAnuncios(@PathVariable String token) {
+	List<Anuncio> listarAnuncios(@RequestHeader String token) {
 		return administrador.listarAnuncios(token);
+	}
+
+
+	@RequestMapping(value = "/anuncio/vender", method = RequestMethod.POST)
+	public
+	@ResponseBody
+	Notificacao venderAnuncio(@RequestBody Anuncio anuncio, @RequestHeader String chave) {
+		return administrador.venderAnuncio(anuncio, chave);
+	}
+
+	@RequestMapping(value = "/anuncio/{id}", method = RequestMethod.GET)
+	public
+	@ResponseBody
+	Anuncio getAnuncio(@PathVariable Long id, @RequestHeader String chave) {
+		return administrador.getAnuncio(id, chave);
+	}
+
+	@RequestMapping(value = "/usuario/notificacao/listar/{idUsuario}", method = RequestMethod.GET)
+	public
+	@ResponseBody
+	List<Notificacao> listarNotificacoesDoUsuario(@PathVariable Long idUsuario, @RequestHeader String chave) {
+		return administrador.listarNotificacoesDoUsuario(idUsuario, chave);
+	}
+
+	@RequestMapping(value = "/usuario/notificacao/{id}")
+	public
+	@ResponseBody
+	Notificacao visualizarNotificacao(@PathVariable Long id, @RequestHeader String chave) {
+		return administrador.visualizarNotificacao(id, chave);
 	}
 
 	@RequestMapping(value = "/usuario/cadastro", method = RequestMethod.POST)
 	public
 	@ResponseBody
-	Usuario cadastro(@RequestBody Usuario usuario) {
-		return administrador.cadastro(usuario);
+	Usuario cadastrarUsuario(@RequestBody Usuario usuario) {
+		return administrador.cadastrarUsuario(usuario);
+	}
+
+	@RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET)
+	public
+	@ResponseBody
+	Usuario getUsuario(@PathVariable Long id, @RequestHeader String chave) {
+		return administrador.getUsuario(id, chave);
 	}
 
 	@RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.POST, produces = MediaType

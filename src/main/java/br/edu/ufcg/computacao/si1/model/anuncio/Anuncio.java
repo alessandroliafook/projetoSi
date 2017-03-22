@@ -42,21 +42,11 @@ public class Anuncio {
     @Column(name = "tipo", nullable = false)
     private TipoAnuncio tipo;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double preco, double nota, TipoAnuncio tipo) {
-        this.titulo = titulo;
-        this.dataDeCriacao = dataDeCriacao;
-        this.preco = preco;
-        this.nota = nota;
-        this.tipo = tipo;
-    }
+    @Column(name = "id_usuario_dono")
+    private Long usuarioId;
 
-    public Anuncio() {
-        titulo = "";
-        dataDeCriacao = new Date();
-        preco = 0;
-        nota = 0.0;
-        tipo = TipoAnuncio.VAZIO;
-    }
+    @Column
+    private boolean vendido;
 
     /**
      * Retorna o id do anuncio
@@ -111,6 +101,22 @@ public class Anuncio {
 
     public void setTipo(TipoAnuncio tipo) {
         this.tipo = tipo;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public boolean isVendido() {
+        return vendido;
+    }
+
+    public void setVendido(boolean vendido) {
+        this.vendido = vendido;
     }
 
     @Override

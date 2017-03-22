@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TokenRepository extends JpaRepository<Token, Long> {
-	Token findByKey(String key);
+	Token findByChave(String chave);
 	Token findByUsuarioId(Long usuarioId);
 }
