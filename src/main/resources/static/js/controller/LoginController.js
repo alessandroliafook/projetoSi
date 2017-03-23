@@ -1,8 +1,8 @@
-app.controller('LoginController', function ($http, $scope, $mdToast, $mdDialog, $state, Auth) {
+app.controller('LoginController', function ($http, $scope, $mdToast, $state, Auth, ModalService) {
 
 	$scope.estaLogando = false;
 
-	$scope.login = function(usuario) {
+    $scope.login = function (usuario, event) {
         $scope.estaLogando = true;
         console.log(usuario.login + " senha = " + usuario.senha);
         $http({
@@ -15,12 +15,10 @@ app.controller('LoginController', function ($http, $scope, $mdToast, $mdDialog, 
         }).success(function (data, status) {
 
             if (data.length == 0) {
-                $scope.dadosIncorretos = true;
-                confirm("Dados incorretos. Tente novamente");
+                ModalService.showConfirm(event, "Dados incorretos", "Tente novamente!");
                 $scope.user = {}
             } else {
                 Auth.saveToken(data);
-                confirm("Login realizado. Ok para ser redirecionado.");
                 $state.go('main');
             }
             $scope.estaLogando = false;
@@ -42,4 +40,9 @@ app.controller('LoginController', function ($http, $scope, $mdToast, $mdDialog, 
         console.log("por aqui!!")
 
     };
+
+    $scope.goToRegisterPage = function () {
+        $state.go("cadastrarUsuario");
+    }
+
 });

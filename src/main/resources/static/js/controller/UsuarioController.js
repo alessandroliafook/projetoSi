@@ -1,4 +1,4 @@
-app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog, Auth, UserFactory) {
+app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog, Auth, UserFactory, ModalService) {
 
     var self = this;
     $scope.inputDataModel = {
@@ -31,7 +31,7 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
         $scope.inputData = angular.copy($scope.inputDataModel);
     };
 
-    $scope.cadastrar = function () {
+    $scope.cadastrar = function (event) {
 
         var usuario = UserFactory.createUser($scope.inputData);
         console.log(usuario);
@@ -47,9 +47,10 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
         }).success(function (data, status) {
 
             console.log(data + "\n" + status);
+            ModalService.showConfirm(event, "Cadastro Realizado", "Cadastro realizado com sucesso!")
 
         }).error(function (err) {
-
+            ModalService.showConfirm(event, "Cadastro não realizado", "Verifique se os dados estão corretos.")
             console.log(err);
         });
     };

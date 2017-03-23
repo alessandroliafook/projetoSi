@@ -12,5 +12,11 @@ app.controller('MainController', function ($scope, $state, Auth) {
     $scope.logout = function () {
         Auth.logout();
     };
-    
+
+
+    if (Auth.getToken() == null) {
+        alert("Você não está autenticado, para acessar essa página realize login.")
+        $state.go('login');
+    }
+
 });
