@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
-import br.edu.ufcg.computacao.si1.model.Notificacao;
+import br.edu.ufcg.computacao.si1.model.usuario.Notificacao;
 import br.edu.ufcg.computacao.si1.repository.NotificacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

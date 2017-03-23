@@ -37,16 +37,21 @@ public class Usuario {
 
     @OneToMany
     @Column(name = "id_anuncios")
-    private List<Long> IdsAnuncios;
+    private List<Long> idsAnuncios;
+
+    @OneToMany
+    @Column
+    private List<Notificacao> notificacoes;
 
     public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario, double saldo,  List<Long>
-            IdsAnuncios) {
+            IdsAnuncios, List<Notificacao> notificacoes) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.tipo = tipoUsuario;
         this.saldo = saldo;
-        this.IdsAnuncios = IdsAnuncios;
+        this.idsAnuncios = IdsAnuncios;
+        this.notificacoes = notificacoes;
     }
 
     public Usuario() {
@@ -55,7 +60,8 @@ public class Usuario {
         this.senha = "12345678";
         this.tipo = TipoUsuario.FISICO;
         this.saldo = 0d;
-        this.IdsAnuncios = new ArrayList<>();
+        this.idsAnuncios = new ArrayList<>();
+        this.notificacoes = new ArrayList<>();
     }
 
     public Long getId() {
@@ -107,15 +113,23 @@ public class Usuario {
     }
 
     public List<Long> getIdsAnuncios() {
-        return IdsAnuncios;
+        return idsAnuncios;
     }
 
     public void setIdsAnuncios(List<Long> idsAnuncios) {
-        this.IdsAnuncios = idsAnuncios;
+        this.idsAnuncios = idsAnuncios;
+    }
+
+    public List<Notificacao> getNotificacoes() {
+        return notificacoes;
+    }
+
+    public void setNotificacoes(List<Notificacao> notificacoes) {
+        this.notificacoes = notificacoes;
     }
 
     public Usuario copiaSemSenha() {
-        return new Usuario(getNome(), getEmail(), "", getTipo(), getSaldo(), getIdsAnuncios());
+        return new Usuario(getNome(), getEmail(), "", getTipo(), getSaldo(), getIdsAnuncios(), getNotificacoes());
     }
 
     public boolean cadastrarAnuncio(Long idAnuncio){
@@ -132,5 +146,9 @@ public class Usuario {
 
     public void realizarVenda(double preco){
         setSaldo(getSaldo() + preco);
+    }
+
+    public boolean notificar(Notificacao notificacao) {
+        return getNotificacoes().add(notificacao);
     }
 }

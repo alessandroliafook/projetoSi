@@ -42,6 +42,7 @@ public class Anuncio {
     @Column(name = "tipo", nullable = false)
     private TipoAnuncio tipo;
 
+    @ManyToOne
     @Column(name = "id_usuario_dono")
     private Long usuarioId;
 
@@ -118,6 +119,8 @@ public class Anuncio {
     public void setVendido(boolean vendido) {
         this.vendido = vendido;
     }
+
+    public void realizarVendido(){ setVendido(true);}
 
     @Override
     public boolean equals(Object o) {

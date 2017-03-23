@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.si1;
 
-import br.edu.ufcg.computacao.si1.model.Notificacao;
+import br.edu.ufcg.computacao.si1.model.usuario.Notificacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.Administrador;
