@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -35,14 +36,13 @@ public class Usuario {
     @DecimalMin(value = "0.0")
     private double saldo;
 
-    @Column(name = "id_anuncios")
-    private List<Long> idsAnuncios;
+    @OneToMany
+    private List<Anuncio> idsAnuncios;
 
     @OneToMany
-    @Column
     private List<Notificacao> notificacoes;
 
-    public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario, double saldo,  List<Long>
+    public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario, double saldo,  List<Anuncio>
             IdsAnuncios, List<Notificacao> notificacoes) {
         this.nome = nome;
         this.email = email;
@@ -111,11 +111,11 @@ public class Usuario {
         this.saldo = saldo;
     }
 
-    public List<Long> getIdsAnuncios() {
+    public List<Anuncio> getIdsAnuncios() {
         return idsAnuncios;
     }
 
-    public void setIdsAnuncios(List<Long> idsAnuncios) {
+    public void setIdsAnuncios(List<Anuncio> idsAnuncios) {
         this.idsAnuncios = idsAnuncios;
     }
 
@@ -131,8 +131,8 @@ public class Usuario {
         return new Usuario(getNome(), getEmail(), "", getTipo(), getSaldo(), getIdsAnuncios(), getNotificacoes());
     }
 
-    public boolean cadastrarAnuncio(Long idAnuncio){
-        return getIdsAnuncios().add(idAnuncio);
+    public boolean cadastrarAnuncio(Anuncio anuncio){
+        return getIdsAnuncios().add(anuncio);
     }
 
     public boolean deletarAnuncio(Long idAnuncio) {

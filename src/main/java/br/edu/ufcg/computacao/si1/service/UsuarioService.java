@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.si1.service;
 
+import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class UsuarioService {
         return repository.findByEmailAndSenha(email, senha);
     }
 
-    public void adicionarAnuncio(Usuario usuario, Long anuncioId) {
-        usuario.cadastrarAnuncio(anuncioId);
+    public void adicionarAnuncio(Usuario usuario, Anuncio anuncio) {
+        usuario.cadastrarAnuncio(anuncio);
     }
 }

@@ -122,7 +122,7 @@ public class Administrador {
 		Token token = autenticacaoService.getTokenByChave(chave);
 		Usuario usuario = usuarioService.getById(token.getUsuarioId());
 
-		usuarioService.adicionarAnuncio(usuario, anuncio.getId());
+		usuarioService.adicionarAnuncio(usuario, anuncio);
 	}
 
 	private void realizarNegocio(Anuncio anuncio, Usuario comprador, Usuario vendedor) {
