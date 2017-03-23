@@ -42,12 +42,23 @@ public class Anuncio {
     @Column(name = "tipo", nullable = false)
     private TipoAnuncio tipo;
 
-    @ManyToOne
     @Column(name = "id_usuario_dono")
     private Long usuarioId;
 
     @Column
     private boolean vendido;
+
+    public Anuncio(String titulo, Date dataDeCriacao, double preco, double nota, TipoAnuncio tipoAnuncio, Long usuarioId) {
+        this.titulo = titulo;
+        this.dataDeCriacao = dataDeCriacao;
+        this.preco = preco;
+        this.nota = nota;
+        this.tipo = tipoAnuncio;
+        this.usuarioId = usuarioId;
+        this.vendido = false;
+    }
+
+    public Anuncio(){}
 
     /**
      * Retorna o id do anuncio

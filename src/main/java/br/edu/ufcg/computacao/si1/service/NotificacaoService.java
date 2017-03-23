@@ -44,10 +44,6 @@ public class NotificacaoService {
 		return false;
 	}
 
-	public List<Notificacao> getNotificacoesUsuario(Long idUsuario) {
-		return repository.findAllByIdUsuario(idUsuario);
-	}
-
 	public Notificacao getNotificacao(Long id) {
 		return repository.getOne(id);
 	}

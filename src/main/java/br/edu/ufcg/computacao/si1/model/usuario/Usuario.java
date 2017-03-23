@@ -35,7 +35,6 @@ public class Usuario {
     @DecimalMin(value = "0.0")
     private double saldo;
 
-    @OneToMany
     @Column(name = "id_anuncios")
     private List<Long> idsAnuncios;
 

@@ -1,9 +1,6 @@
 package br.edu.ufcg.computacao.si1.model.usuario;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 /**
  * Created by Alessandro Fook on 22/03/2017.
@@ -12,6 +9,7 @@ import javax.persistence.GenerationType;
 public class Notificacao {
 
 	@Column
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
