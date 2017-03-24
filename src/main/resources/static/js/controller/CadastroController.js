@@ -1,4 +1,4 @@
-app.controller('CadastroController', function ($http, $scope, AnuncioFactory, Auth) {
+app.controller('CadastroController', function ($http, $scope, $state, AnuncioFactory, Auth, ModalService) {
 
     var self = this;
 
@@ -28,7 +28,7 @@ app.controller('CadastroController', function ($http, $scope, AnuncioFactory, Au
         $scope.inputData = angular.copy(self.inputDataModel);
     };
 
-    $scope.cadastrar = function () {
+    $scope.cadastrar = function (event) {
 
         var anuncio = AnuncioFactory.create($scope.inputData);
 
@@ -42,9 +42,17 @@ app.controller('CadastroController', function ($http, $scope, AnuncioFactory, Au
             }
         }).success(function (data, status) {
             console.log(data + "\n" + status);
+            ModalService.showConfirm(event, "Cadastro realizado", "Cadastro realizado com sucesso!");
+            $state.go('main');
         }).error(function (err) {
             console.log(err);
+            ModalService.showConfirm(event, "Cadastro não realizado", "Insira os dados corretamente!");
         });
+    };
+
+    $scope.logout = function () {
+        Auth.logout();
+        $state.go('login');
     };
 
     self.allFalse = function (array) {
@@ -55,6 +63,11 @@ app.controller('CadastroController', function ($http, $scope, AnuncioFactory, Au
         return cont == 0;
     };
 
+
+    if (Auth.getToken() == null) {
+        alert("Você não está autenticado, para acessar essa página realize login.");
+        $state.go('login');
+    }
 
 
 });

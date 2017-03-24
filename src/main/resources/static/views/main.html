@@ -27,11 +27,32 @@
             </md-menu>
         </md-menu-bar>
 
+        <md-menu>
+            <md-button class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+                <md-icon><i class="material-icons">more_vert</i></md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ng-click="logout()">
+                        <md-icon><i class="material-icons">exit_to_app</i></md-icon>
+                        Logout
+                    </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+            </md-menu-content>
+        </md-menu>
 
-        <md-button ng-click="logout()">
-            <md-icon><i class="material-icons">exit_to_app</i></md-icon>
-            Logout
-        </md-button>
+        
 
     </div>
 </md-toolbar>
+
+<ng-include src="/views/sidenav.html"></ng-include>
+
+<div layout="row" layout-align="space-around center" style="padding-top: 50px; padding-bottom: 50px">
+    <div class="padded" md-whiteframe="24dp" flex="100" flex-gt-sm="50" layout="column" layout-align="center center"
+         flex>
+        <h3 class="fonte1" ng-non-bindable>Seja bem vindo!</h3>
+        <h4 class="fonte2">Ad-extreme, anuncios com amor <3</h4>
+    </div>
+</div>
