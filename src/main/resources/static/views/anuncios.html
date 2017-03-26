@@ -1,6 +1,155 @@
-<md-toolbar class="md-hue-2">
+<md-toolbar class="md-hue-2 fixedNav" id="nav">
     <div class="md-toolbar-tools" layout="row">
         
         <h2 flex md-truncate>$ ad-extreme</h2>
+
+        <md-button ng-click="logout()">
+            <md-icon><i class="material-icons">exit_to_app</i></md-icon>
+            Logout
+        </md-button>
     </div>
+
+    <md-nav-bar
+            id="nav2"
+            md-selected-nav-item="currentNavItem"
+            nav-bar-aria-label="navigation links">
+        <md-nav-item name="moveis" md-nav-click="goto('moveis')">
+            Móveis
+        </md-nav-item>
+        <md-nav-item name="imoveis" md-nav-click="goto('imoveis')">
+            Imóveis
+        </md-nav-item>
+        <md-nav-item name="empregos" md-nav-click="goto('empregos')">
+            Empregos
+        </md-nav-item>
+    </md-nav-bar>
+
 </md-toolbar>
+
+
+<md-content class="md-padding" layout-xs="column" layout="row" id="pageBody" ng-init="populate()">
+    <div layout-xs="column" flex-xs flex-gt-xs="50" ng-repeat="anuncio in anuncios"
+         ng-if="currentNavItem == 'moveis' && anuncio.tipo == 'MOVEL'" layout-margin>
+
+        <md-card>
+            <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out" style="width: inherit; height: auto">
+            <md-card-title>
+                <md-card-title-text layout="row" layout-align="space-between center">
+                    <span class="md-headline">{{anuncio.titulo}}</span>
+                    <span class="md-headline" md-colors="{color: 'green'}">${{anuncio.preco}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="start center">
+                <md-card-icon-actions>
+                    <md-button class="md-icon-button" aria-label="Favorite">
+                        <md-icon>
+                            <i class="material-icons">favorite_border</i>
+                        </md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Share">
+                        <md-icon>
+                            <i class="material-icons">share</i>
+                        </md-icon>
+                    </md-button>
+                </md-card-icon-actions>
+                <md-button>Comprar</md-button>
+                <md-button>Denunciar</md-button>
+            </md-card-actions>
+            <md-card-content>
+                <p>
+                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                    two most important words in Ernest Greene's musical language: feel it. It's a simple request, as
+                    well...
+                </p>
+            </md-card-content>
+        </md-card>
+
+    </div>
+
+
+    <div layout-xs="column" flex-xs flex-gt-xs="50" ng-repeat="anuncio in anuncios"
+         ng-if="currentNavItem == 'imoveis' && anuncio.tipo == 'IMOVEL'" layout-margin>
+
+        <md-card>
+            <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out" style="width: inherit; height: auto">
+            <md-card-title>
+                <md-card-title-text layout="row" layout-align="space-between center">
+                    <span class="md-headline">{{anuncio.titulo}}</span>
+                    <span class="md-headline" md-colors="{color: 'green'}">${{anuncio.preco}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="start center">
+                <md-card-icon-actions>
+                    <md-button class="md-icon-button" aria-label="Favorite">
+                        <md-icon>
+                            <i class="material-icons">favorite_border</i>
+                        </md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Share">
+                        <md-icon>
+                            <i class="material-icons">share</i>
+                        </md-icon>
+                    </md-button>
+                </md-card-icon-actions>
+                <md-button>Comprar</md-button>
+                <md-button>Denunciar</md-button>
+            </md-card-actions>
+            <md-card-content>
+                <p>
+                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                    two most important words in Ernest Greene's musical language: feel it. It's a simple request, as
+                    well...
+                </p>
+            </md-card-content>
+        </md-card>
+
+    </div>
+
+
+    <div layout-xs="column" flex-xs flex-gt-xs="50" ng-repeat="anuncio in anuncios"
+         ng-if="currentNavItem == 'empregos' && anuncio.tipo == 'EMPREGO'" layout-margin>
+
+        <md-card>
+            <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out" style="width: inherit; height: auto">
+            <md-card-title>
+                <md-card-title-text layout="row" layout-align="space-between center">
+                    <span class="md-headline">{{anuncio.titulo}}</span>
+                    <span class="md-headline" md-colors="{color: 'green'}">${{anuncio.preco}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="start center">
+                <md-card-icon-actions>
+                    <md-button class="md-icon-button" aria-label="Favorite">
+                        <md-icon>
+                            <i class="material-icons">favorite_border</i>
+                        </md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Share">
+                        <md-icon>
+                            <i class="material-icons">share</i>
+                        </md-icon>
+                    </md-button>
+                </md-card-icon-actions>
+                <md-button>Comprar</md-button>
+                <md-button>Denunciar</md-button>
+            </md-card-actions>
+            <md-card-content>
+                <p>
+                    The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                    two most important words in Ernest Greene's musical language: feel it. It's a simple request, as
+                    well...
+                </p>
+            </md-card-content>
+        </md-card>
+
+    </div>
+
+
+</md-content>
+
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        var h = $('#nav').height();
+        $('#pageBody').animate({paddingTop: h + 20});
+    });
+</script>

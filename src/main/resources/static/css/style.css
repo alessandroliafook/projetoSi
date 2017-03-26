@@ -43,3 +43,10 @@ body {
 .button-right {
     float: right;
 }
+
+.fixedNav {
+    position: fixed;
+    top: 0;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}

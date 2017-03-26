@@ -1,4 +1,4 @@
-app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog, Auth, UserFactory, ModalService) {
+app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog, $state, Auth, UserFactory, ModalService) {
 
     var self = this;
     $scope.inputDataModel = {
@@ -48,6 +48,7 @@ app.controller('UsuarioController', function ($http, $scope, $mdToast, $mdDialog
 
             console.log(data + "\n" + status);
             ModalService.showConfirm(event, "Cadastro Realizado", "Cadastro realizado com sucesso!")
+            $state.go('login');
 
         }).error(function (err) {
             ModalService.showConfirm(event, "Cadastro não realizado", "Verifique se os dados estão corretos.")

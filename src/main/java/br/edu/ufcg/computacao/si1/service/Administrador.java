@@ -100,8 +100,8 @@ public class Administrador {
 	//metodos do usuario
 	public Usuario cadastrarUsuario(Usuario usuario) {
 		Usuario novoUsuario = usuarioService.create(usuario);
-		return (novoUsuario != null) ? novoUsuario.copiaSemSenha() : null;
-	}
+        return (novoUsuario != null) ? novoUsuario : null;
+    }
 
 	public Usuario getUsuario(Long id, String chave) {
 		return (validarToken(chave)) ? usuarioService.getById(id) : null;

@@ -28,7 +28,7 @@
         </md-menu-bar>
 
         <md-menu>
-            <md-button class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+            <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
                 <md-icon><i class="material-icons">more_vert</i></md-icon>
             </md-button>
             <md-menu-content width="4">
@@ -47,7 +47,7 @@
     </div>
 </md-toolbar>
 
-<ng-include src="/views/sidenav.html"></ng-include>
+<ng-include src="'/views/sidenav.html'"></ng-include>
 
 <div layout="row" layout-align="space-around center" style="padding-top: 50px; padding-bottom: 50px">
     <div class="padded" md-whiteframe="24dp" flex="100" flex-gt-sm="50" layout="column" layout-align="center center"

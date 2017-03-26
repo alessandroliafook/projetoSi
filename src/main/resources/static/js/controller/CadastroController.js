@@ -34,14 +34,15 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
 
         $http({
             method: "POST",
-            url: "/usuario/anuncio/" + Auth.getToken(),
+            url: "/usuario/anuncio/",
             data: anuncio,
             headers: {
+                'token': Auth.getToken(),
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         }).success(function (data, status) {
-            console.log(data + "\n" + status);
+            console.log(JSON.stringify(data) + "\n" + status);
             ModalService.showConfirm(event, "Cadastro realizado", "Cadastro realizado com sucesso!");
             $state.go('main');
         }).error(function (err) {
