@@ -83,4 +83,20 @@ public class Fachada {
 	String autenticacao(@PathVariable String email, @PathVariable String senha) {
 		return administrador.autenticacao(email, senha);
 	}
+
+	@RequestMapping(value = "/usuario/saldo/{id}", method = RequestMethod.GET)
+	public
+	@ResponseBody
+	double getSaldoUsuario(@PathVariable Long id, @RequestHeader String token) {
+		return administrador.getUsuario(id, token).getSaldo();
+	}
+
+	@RequestMapping(value = "/usuario/nome/{id}", method = RequestMethod.GET, produces = MediaType
+			.TEXT_PLAIN_VALUE)
+	public
+	@ResponseBody
+	String getNomeUsuario(@PathVariable Long id, @RequestHeader String token) {
+		return administrador.getUsuario(id, token).getNome();
+	}
+
 }

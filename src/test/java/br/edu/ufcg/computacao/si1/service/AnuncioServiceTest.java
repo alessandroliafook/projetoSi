@@ -33,9 +33,9 @@ public class AnuncioServiceTest {
 
     @Before
     public void setUp() {
-        anuncio1 = new Anuncio("Anuncio de Movel", new Date(), 100.0, 1.0, TipoAnuncio.MOVEL, new Long(1));
-        anuncio2 = new Anuncio("Anuncio de Imovel", new Date(), 100000.0, 3.0, TipoAnuncio.IMOVEL, new Long(1));
-        anuncio3 = new Anuncio("Anuncio de Emprego", new Date(), 0.5, 1.0, TipoAnuncio.EMPREGO, new Long(1));
+        anuncio1 = new Anuncio("Anuncio de Movel", new Date(), 100.0, 1.0, TipoAnuncio.MOVEL, new Long(1), "Joao");
+        anuncio2 = new Anuncio("Anuncio de Imovel", new Date(), 100000.0, 3.0, TipoAnuncio.IMOVEL, new Long(1), "Pedro");
+        anuncio3 = new Anuncio("Anuncio de Emprego", new Date(), 0.5, 1.0, TipoAnuncio.EMPREGO, new Long(1), "Paulo");
     }
 
     @After

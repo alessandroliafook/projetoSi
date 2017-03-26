@@ -48,7 +48,10 @@ public class Anuncio {
     @Column
     private boolean vendido;
 
-    public Anuncio(String titulo, Date dataDeCriacao, double preco, double nota, TipoAnuncio tipoAnuncio, Long usuarioId) {
+    @Column
+    private String nomeUsuario;
+
+    public Anuncio(String titulo, Date dataDeCriacao, double preco, double nota, TipoAnuncio tipoAnuncio, Long usuarioId, String nomeUsuario) {
         this.titulo = titulo;
         this.dataDeCriacao = dataDeCriacao;
         this.preco = preco;
@@ -56,6 +59,7 @@ public class Anuncio {
         this.tipo = tipoAnuncio;
         this.usuarioId = usuarioId;
         this.vendido = false;
+        this.nomeUsuario = nomeUsuario;
     }
 
     public Anuncio(){}
@@ -132,6 +136,14 @@ public class Anuncio {
     }
 
     public void realizarVendido(){ setVendido(true);}
+
+    public void setNomeUsuario(String nome) {
+        this.nomeUsuario = nome;
+    }
+
+    public String getNomeUsuario() {
+        return this.nomeUsuario;
+    }
 
     @Override
     public boolean equals(Object o) {

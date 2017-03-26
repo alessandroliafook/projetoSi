@@ -33,9 +33,19 @@ public class Administrador {
 	public Anuncio cadastrarAnuncio(Anuncio anuncio, String chave) {
 
 		if (validarToken(chave)) {
-			adicionarAnuncioAoUsuario(anuncio, chave);
 
-			return anuncioService.create(anuncio);
+			Token token = autenticacaoService.getTokenByChave(chave);
+			Long usuarioId = token.getUsuarioId();
+			String nomeUsuario = usuarioService.getById(usuarioId).getNome();
+
+			anuncio.setUsuarioId(usuarioId);
+			anuncio.setNomeUsuario(nomeUsuario);
+
+			Anuncio novoAnuncio = anuncioService.create(anuncio);
+
+			adicionarAnuncioAoUsuario(novoAnuncio, chave);
+
+			return novoAnuncio;
 		}
 
 		return null;
@@ -100,8 +110,8 @@ public class Administrador {
 	//metodos do usuario
 	public Usuario cadastrarUsuario(Usuario usuario) {
 		Usuario novoUsuario = usuarioService.create(usuario);
-        return (novoUsuario != null) ? novoUsuario : null;
-    }
+		return (novoUsuario != null) ? novoUsuario : null;
+	}
 
 	public Usuario getUsuario(Long id, String chave) {
 		return (validarToken(chave)) ? usuarioService.getById(id) : null;

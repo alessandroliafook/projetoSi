@@ -22,7 +22,10 @@ app.service('AnuncioFactory', function () {
                 tipo: type,
                 nota: 0.0,
                 dataDeCriacao: currentDate,
-                _id: 0
+                id: 0,
+                vendido: false,
+                usuarioId: 0,
+                nomeUsuario: "default"
             }
         }
 

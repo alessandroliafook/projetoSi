@@ -75,3 +75,8 @@ body {
     font-size: 16px;
     margin:0 0 5px;
 }
+
+.md-errors-spacer:empty {
+    display: none;
+}
+
