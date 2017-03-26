@@ -1,6 +1,4 @@
-/**
- * Created by lucasdiniz on 23/03/17.
- */
+
 app.service('Auth', function ($cookies, $state, $http) {
     this.getToken = function () {
         var tokenUser = $cookies.get('token');

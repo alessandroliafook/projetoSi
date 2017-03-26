@@ -50,3 +50,28 @@ body {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
 }
+
+#info-usuario {
+    padding: 10px;
+}
+
+.nome-usuario {
+    font-size: 18px;
+    font-style: bold;
+    margin:5px 0 10px;
+}
+
+.nome-usuario span{
+    font-size: 17px;
+    font-style: normal;
+}
+
+.saldo-usuario {
+    font-size: 18px;
+    margin:0 0 5px;
+}
+
+.anuncios-usuario {
+    font-size: 16px;
+    margin:0 0 5px;
+}

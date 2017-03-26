@@ -1,4 +1,8 @@
-app.controller('MainController', function ($scope, $state, $mdDialog, Auth) {
+app.controller('MainController', function ($scope, $state, $mdDialog, $mdSidenav, Auth, Menu) {
+
+    $scope.optionsMenu = Menu.getMenuOptionsAccount();
+    $scope.menuList = Menu.getMenuList();
+    $scope.heightWindow = window.innerHeight;
 
 
     $scope.cadastrarAnuncio = function () {
@@ -13,15 +17,17 @@ app.controller('MainController', function ($scope, $state, $mdDialog, Auth) {
         Auth.logout();
     };
 
-
     if (Auth.getToken() == null) {
         alert("Você não está autenticado, para acessar essa página realize login.")
         $state.go('login');
     }
 
     $scope.openMenu = function($mdMenu, ev) {
-      originatorEv = ev;
-      $mdMenu.open(ev);
+        originatorEv = ev;
+        $mdMenu.open(ev);
     };
 
+    $scope.changeSidenav = function() {
+        Menu.changeSidenav();
+    }
 });

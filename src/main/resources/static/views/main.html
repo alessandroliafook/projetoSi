@@ -1,58 +1,63 @@
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools" layout="row">
+<div ng-style="{height: heightWindow + 'px'}">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools" layout="row">
 
-        <h2 flex md-truncate>$ ad-extreme</h2>
+            <md-button class="md-icon-button" aria-label="Opções" ng-click="changeSidenav()">
+                <md-icon><i class="material-icons">menu</i></md-icon>
+            </md-button>
 
-        <md-menu-bar layout="row">
-            <md-menu flex>
-                <!-- Trigger element is a md-button with an icon -->
-                <md-button ng-click="$mdOpenMenu($event)" aria-label="Open menu">
-                    Anúncios
+            <h2 flex md-truncate>$ ad-extreme</h2>
+
+            <md-menu-bar layout="row">
+                <md-menu flex>
+                    <!-- Trigger element is a md-button with an icon -->
+                    <md-button ng-click="$mdOpenMenu($event)" aria-label="Open menu">
+                        Anúncios
+                    </md-button>
+                    <md-menu-content width="4" id="options">
+
+                        <md-menu-item md-menu-origin md-menu-align-target>
+                            <md-button ng-click="cadastrarAnuncio()">
+                                Cadastrar
+                            </md-button>
+                        </md-menu-item>
+
+                        <md-menu-item>
+                            <md-button ng-click="mostraAnuncios()">
+                                Todos os anúncios
+                            </md-button>
+                        </md-menu-item>
+
+                    </md-menu-content>
+                </md-menu>
+            </md-menu-bar>
+
+            <md-menu>
+                <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon><i class="material-icons">more_vert</i></md-icon>
                 </md-button>
-                <md-menu-content width="4" id="options">
-
-                    <md-menu-item md-menu-origin md-menu-align-target>
-                        <md-button ng-click="cadastrarAnuncio()">
-                            Cadastrar
+                <md-menu-content width="4">
+                    <md-menu-item ng-repeat="item in optionsMenu">
+                        <md-button ng-click="Menu.changeState(item.state)">
+                            <md-icon><i class="material-icons">{{ item.icon }}</i></md-icon>
+                            {{ item.titulo }}
                         </md-button>
                     </md-menu-item>
-
-                    <md-menu-item>
-                        <md-button ng-click="mostraAnuncios()">
-                            Todos os anúncios
-                        </md-button>
-                    </md-menu-item>
-
                 </md-menu-content>
             </md-menu>
-        </md-menu-bar>
 
-        <md-menu>
-            <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                <md-icon><i class="material-icons">more_vert</i></md-icon>
-            </md-button>
-            <md-menu-content width="4">
-                <md-menu-item>
-                    <md-button ng-click="logout()">
-                        <md-icon><i class="material-icons">exit_to_app</i></md-icon>
-                        Logout
-                    </md-button>
-                </md-menu-item>
-                <md-menu-divider></md-menu-divider>
-            </md-menu-content>
-        </md-menu>
+            
 
-        
+        </div>
+    </md-toolbar>
 
-    </div>
-</md-toolbar>
+    <ng-include src="'/views/sidenav.html'"></ng-include>
 
-<ng-include src="'/views/sidenav.html'"></ng-include>
-
-<div layout="row" layout-align="space-around center" style="padding-top: 50px; padding-bottom: 50px">
-    <div class="padded" md-whiteframe="24dp" flex="100" flex-gt-sm="50" layout="column" layout-align="center center"
-         flex>
-        <h3 class="fonte1" ng-non-bindable>Seja bem vindo!</h3>
-        <h4 class="fonte2">Ad-extreme, anuncios com amor <3</h4>
+    <div layout="row" layout-align="space-around center" style="padding-top: 50px; padding-bottom: 50px">
+        <div class="padded" md-whiteframe="24dp" flex="100" flex-gt-sm="50" layout="column" layout-align="center center"
+             flex>
+            <h3 class="fonte1" ng-non-bindable>Seja bem vindo!</h3>
+            <h4 class="fonte2">Ad-extreme, anuncios com amor <3</h4>
+        </div>
     </div>
 </div>
