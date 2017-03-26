@@ -3,7 +3,7 @@ app.service('Auth', function ($cookies, $state, $http) {
     this.getToken = function () {
         var tokenUser = $cookies.get('token');
         if (tokenUser) {
-            $http.defaults.headers.common['Authorization'] = tokenUser;
+            $http.defaults.headers.common['token'] = tokenUser;
             return tokenUser;
         } else {
             return null;
@@ -12,7 +12,7 @@ app.service('Auth', function ($cookies, $state, $http) {
 
     this.saveToken = function (token) {
         $cookies.put('token', token);
-        $http.defaults.headers.common['Authorization'] = token;
+        $http.defaults.headers.common['token'] = token;
     };
 
     this.logout = function () {
@@ -31,6 +31,6 @@ app.service('Auth', function ($cookies, $state, $http) {
     };
 
     if (this.getToken()) {
-        $http.defaults.headers.common['Authorization'] = this.getToken();
+        $http.defaults.headers.common['token'] = this.getToken();
     }
 });

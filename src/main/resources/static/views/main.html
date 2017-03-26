@@ -2,7 +2,7 @@
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools" layout="row">
 
-            <md-button class="md-icon-button" aria-label="Opções" ng-click="changeSidenav()">
+            <md-button class="md-icon-button" aria-label="Opções" ng-click="menu.changeSidenav()">
                 <md-icon><i class="material-icons">menu</i></md-icon>
             </md-button>
 
@@ -38,7 +38,7 @@
                 </md-button>
                 <md-menu-content width="4">
                     <md-menu-item ng-repeat="item in optionsMenu">
-                        <md-button ng-click="Menu.changeState(item.state)">
+                        <md-button ng-click="menu.changeState(item.state)">
                             <md-icon><i class="material-icons">{{ item.icon }}</i></md-icon>
                             {{ item.titulo }}
                         </md-button>

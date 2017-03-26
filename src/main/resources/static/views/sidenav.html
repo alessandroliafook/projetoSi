@@ -2,7 +2,7 @@
 
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <md-button class="md-icon-button button-menu" aria-label="Menu" ng-click="changeSidenav()" >
+      <md-button class="md-icon-button button-menu" aria-label="Menu" ng-click="menu.changeSidenav()" >
             <md-icon><i class="material-icons">arrow_back</i></md-icon>
           </md-button>
       <h1>Menu</h1>
@@ -19,7 +19,7 @@
       </section>
       <md-list>
         <md-divider inset></md-divider>
-        <md-list-item class="md-3-line md-icon-float"" ng-repeat="item in menuList" ng-click="changeState(item.state)" ng-show="item.state != Menu.currentState()">
+        <md-list-item class="md-3-line md-icon-float"" ng-repeat="item in menuList" ng-click="menu.changeState(item.state)" ng-show="item.state != menu.currentState()">
           <md-icon md-colors="{background:'primary'}" class="md-primary md-avatar-icon icon-menu-sidebar"><i class="material-icons">{{ item.icon }}</i></md-icon>
           <h3 class="md-primary" flex>{{item.titulo}}</h3>
           <md-divider inset></md-divider>

@@ -4,6 +4,8 @@ app.controller('MainController', function ($scope, $state, $mdDialog, $mdSidenav
     $scope.menuList = Menu.getMenuList();
     $scope.heightWindow = window.innerHeight;
 
+    $scope.menu = Menu;
+
 
     $scope.cadastrarAnuncio = function () {
         $state.go('cadastrarAnuncio');
