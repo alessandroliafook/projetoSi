@@ -27,8 +27,8 @@ public class Token {
 		setExpirationDate(new Date());
 		getExpirationDate().setTime(System.currentTimeMillis() + DIA_IN_MILISECONDS);
 		setChave(UUID.randomUUID().toString());
-		setUusuarioId(usuarioId);
-	}
+        setUsuarioId(usuarioId);
+    }
 
     public Token() {
     }
@@ -61,7 +61,7 @@ public class Token {
 		return usuarioId;
 	}
 
-	public void setUusuarioId(Long usuarioId) {
-		this.usuarioId = usuarioId;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
 	}
 }

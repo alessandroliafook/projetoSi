@@ -42,9 +42,15 @@
                     Emprego
                 </md-checkbox>
 
+                <md-checkbox ng-model="inputData.type['SERVICO']" ng-disabled="isDisabled('SERVICO')">
+                    Serviço
+                </md-checkbox>
+
             </fieldset>
 
             <div layout="row" layout-align="space-around center">
+                <md-progress-circular class="progress-login" ng-show="esperandoRequisicoes"
+                                      md-diameter="25px"></md-progress-circular>
                 <md-button role="submit" class="md-raised md-primary" ng-click="cadastrar()"
                            ng-disabled="checkType() || cadastroAnuncioForm.$invalid">Cadastrar
                 </md-button>

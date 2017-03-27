@@ -117,6 +117,15 @@ public class Administrador {
 		return (validarToken(chave)) ? usuarioService.getById(id) : null;
 	}
 
+    public Usuario getUsuario(String chave) {
+        if (validarToken(chave)) {
+            Token token = autenticacaoService.getTokenByChave(chave);
+            Usuario usuario = usuarioService.getById(token.getUsuarioId());
+            return usuario;
+        }
+        return null;
+    }
+
 	//metodos de seguranca
 	public String autenticacao(String email, String senha) {
 

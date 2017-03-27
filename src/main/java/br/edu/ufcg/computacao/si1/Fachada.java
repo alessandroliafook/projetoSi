@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.si1;
 
 import br.edu.ufcg.computacao.si1.model.usuario.Notificacao;
 import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
+import br.edu.ufcg.computacao.si1.model.usuario.TipoUsuario;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.Administrador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,13 @@ public class Fachada {
 	@ResponseBody
 	String getNomeUsuario(@PathVariable Long id, @RequestHeader String token) {
 		return administrador.getUsuario(id, token).getNome();
+	}
+
+	@RequestMapping(value = "/usuario/tipo/", method = RequestMethod.GET)
+	public
+	@ResponseBody
+	TipoUsuario getTipoUsuario(@RequestHeader String token) {
+		return administrador.getUsuario(token).getTipo();
 	}
 
 }

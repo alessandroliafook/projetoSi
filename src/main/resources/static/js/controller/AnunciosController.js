@@ -5,6 +5,11 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state) {
     $scope.imagePath = '/img/anuncioDefault.jpeg';
     $scope.anuncios;
     $scope.searchParam = "";
+    $scope.currentNavItem = "moveis";
+
+    $scope.goToMain = function () {
+        $state.go('main');
+    };
 
     $scope.populate = function () {
         $http({
@@ -36,6 +41,11 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state) {
         });
 
         return canShow;
+    };
+
+    if (Auth.getToken() == null) {
+        alert("Você não está autenticado, para acessar essa página realize login.");
+        $state.go('login');
     }
 
 });

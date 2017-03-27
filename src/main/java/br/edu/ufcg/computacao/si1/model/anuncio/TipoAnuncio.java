@@ -5,6 +5,6 @@ package br.edu.ufcg.computacao.si1.model.anuncio;
  */
 public enum TipoAnuncio {
 
-	MOVEL, IMOVEL, EMPREGO, VAZIO;
+    MOVEL, IMOVEL, EMPREGO, SERVICO, VAZIO;
 
 }

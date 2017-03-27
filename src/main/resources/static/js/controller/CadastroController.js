@@ -2,8 +2,13 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
 
     var self = this;
 
-    self.inputDataModel = {title: "", price: undefined, type: {'MOVEL': false, 'IMOVEL': false, 'EMPREGO': false}};
+    self.inputDataModel = {
+        title: "",
+        price: undefined,
+        type: {'MOVEL': false, 'IMOVEL': false, 'EMPREGO': false, 'SERVICO': false}
+    };
     $scope.inputData = angular.copy(self.inputDataModel);
+    $scope.esperandoRequisicoes = false;
 
     $scope.isDisabled = function (typeKey) {
 
@@ -30,24 +35,24 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
 
     $scope.cadastrar = function (event) {
 
+        $scope.esperandoRequisicoes = true;
+
         var anuncio = AnuncioFactory.create($scope.inputData);
 
-        $http({
-            method: "POST",
-            url: "/usuario/anuncio/",
-            data: anuncio,
-            headers: {
-                'token': Auth.getToken(),
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+        var promise = self.getUserTypePromise();
+
+        promise.then(function (data) {
+
+            var tipoUsuario = data.data;
+
+            if (anuncio.tipo == "SERVICO" && tipoUsuario !== "JURIDICO") {
+                ModalService.showConfirm(event, "Não autorizado", "Apenas pessoas jurídicas podem oferecer serviços.");
+                $scope.esperandoRequisicoes = false;
             }
-        }).success(function (data, status) {
-            console.log(JSON.stringify(data) + "\n" + status);
-            ModalService.showConfirm(event, "Cadastro realizado", "Cadastro realizado com sucesso!");
-            $state.go('main');
-        }).error(function (err) {
-            console.log(err);
-            ModalService.showConfirm(event, "Cadastro não realizado", "Insira os dados corretamente!");
+
+            else {
+                self.sendData(anuncio, event);
+            }
         });
     };
 
@@ -62,6 +67,38 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
             if (array[key]) cont += 1;
         });
         return cont == 0;
+    };
+
+    self.getUserTypePromise = function () {
+        return $http({
+            method: "GET",
+            url: "/usuario/tipo/",
+            headers: {
+                'token': Auth.getToken()
+            }
+        });
+    };
+
+    self.sendData = function (anuncio, event) {
+        $http({
+            method: "POST",
+            url: "/usuario/anuncio/",
+            data: anuncio,
+            headers: {
+                'token': Auth.getToken(),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).success(function (data, status) {
+            console.log(JSON.stringify(data) + "\n" + status);
+            ModalService.showConfirm(event, "Cadastro realizado", "Cadastro realizado com sucesso!");
+            $scope.esperandoRequisicoes = false;
+            $state.go('main');
+        }).error(function (err) {
+            console.log(err);
+            $scope.esperandoRequisicoes = false;
+            ModalService.showConfirm(event, "Cadastro não realizado", "Insira os dados corretamente!");
+        });
     };
 
 

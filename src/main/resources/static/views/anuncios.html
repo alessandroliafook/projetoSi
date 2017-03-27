@@ -1,7 +1,7 @@
 <md-toolbar class="md-hue-2" id="nav" ng-show="!showSearch">
     <div class="md-toolbar-tools" layout="row">
 
-        <h2 flex md-truncate>$ ad-extreme</h2>
+        <h2 flex md-truncate ng-click="goToMain()">$ ad-extreme</h2>
 
         <md-button aria-label="Search" ng-click="showSearch = !showSearch">
             <md-icon><i class="material-icons">search</i></md-icon>
@@ -28,6 +28,9 @@
         <md-nav-item name="empregos" md-nav-click="goto('empregos')">
             Empregos
         </md-nav-item>
+        <md-nav-item name="servicos" md-nav-click="goto('servicos')">
+            Serviços
+        </md-nav-item>
     </md-nav-bar>
 
 </md-toolbar>
@@ -43,7 +46,7 @@
         </h3>
         <md-input-container md-theme="input" flex>
             <label>&nbsp;</label>
-            <input ng-model="searchParam" placeholder="enter search">
+            <input ng-model="searchParam" placeholder="Você pode pesquisar qualquer coisa. Ex: 01-abr-2017">
         </md-input-container>
         <md-button aria-label="Search" ng-click="showSearch = !showSearch">
             <md-icon><i class="material-icons">search</i></md-icon>
@@ -53,9 +56,11 @@
 </md-toolbar>
 
 
-<md-content layout-xs="column" layout="row" id="pageBody" ng-init="populate()">
-    <div layout-xs="column" flex-xs flex-gt-xs="33" ng-repeat="anuncio in anuncios"
-         ng-if="currentNavItem == 'moveis' && anuncio.tipo == 'MOVEL' && isSearchFiltered(anuncio)" layout-margin>
+<md-content layout-xs="column" layout="row" id="pageBody" ng-init="populate()" layout-align="space-between center"
+            layout-wrap style="overflow-y: scroll">
+    <div layout-xs="column" flex-xs flex-gt-xs="30" ng-repeat="anuncio in anuncios"
+         ng-if="currentNavItem == 'moveis' && anuncio.tipo == 'MOVEL' && isSearchFiltered(anuncio)" layout-margin
+         ng-cloak>
 
         <md-card>
             <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out" style="width: inherit; height: auto">
@@ -93,6 +98,54 @@
             <md-card-content>
                 <p>
                     Este {{anuncio.tipo}} é fornecido com exclusividade pela ad-extreme!
+                    Data de criação: {{anuncio.dataDeCriacao}}
+                </p>
+            </md-card-content>
+        </md-card>
+    </div>
+
+
+    <div layout-xs="column" flex-xs flex-gt-xs="30" ng-repeat="anuncio in anuncios"
+         ng-if="currentNavItem == 'imoveis' && anuncio.tipo == 'IMOVEL' && isSearchFiltered(anuncio)" layout-margin
+         ng-cloak>
+
+        <md-card>
+            <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out" style="width: inherit; height: auto">
+            <md-card-header>
+                <md-card-avatar>
+                    <img src="/img/logo.svg"/>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title"> Vendedor</span>
+                    <span class="md-subhead"> {{anuncio.nomeUsuario}}</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-title>
+                <md-card-title-text layout="row" layout-align="space-between center">
+                    <span class="md-headline">{{anuncio.titulo}}</span>
+                    <span class="md-headline" md-colors="{color: 'green'}">${{anuncio.preco}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="start center">
+                <md-card-icon-actions>
+                    <md-button class="md-icon-button" aria-label="Favorite">
+                        <md-icon>
+                            <i class="material-icons">favorite_border</i>
+                        </md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Share">
+                        <md-icon>
+                            <i class="material-icons">share</i>
+                        </md-icon>
+                    </md-button>
+                </md-card-icon-actions>
+                <md-button>Comprar</md-button>
+                <md-button>Denunciar</md-button>
+            </md-card-actions>
+            <md-card-content>
+                <p>
+                    Este {{anuncio.tipo}} é fornecido com exclusividade pela ad-extreme!
+                    Data de criação: {{anuncio.dataDeCriacao}}
                 </p>
             </md-card-content>
         </md-card>
@@ -100,8 +153,9 @@
     </div>
 
 
-    <div layout-xs="column" flex-xs flex-gt-xs="33" ng-repeat="anuncio in anuncios"
-         ng-if="currentNavItem == 'imoveis' && anuncio.tipo == 'IMOVEL' && isSearchFiltered(anuncio)" layout-margin>
+    <div layout-xs="column" flex-xs flex-gt-xs="30" ng-repeat="anuncio in anuncios"
+         ng-if="currentNavItem == 'empregos' && anuncio.tipo == 'EMPREGO' && isSearchFiltered(anuncio)" layout-margin
+         ng-cloak>
 
         <md-card>
             <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out" style="width: inherit; height: auto">
@@ -139,15 +193,16 @@
             <md-card-content>
                 <p>
                     Este {{anuncio.tipo}} é fornecido com exclusividade pela ad-extreme!
+                    Data de criação: {{anuncio.dataDeCriacao}}
                 </p>
             </md-card-content>
         </md-card>
 
     </div>
 
-
-    <div layout-xs="column" flex-xs flex-gt-xs="33" ng-repeat="anuncio in anuncios"
-         ng-if="currentNavItem == 'empregos' && anuncio.tipo == 'EMPREGO' && isSearchFiltered(anuncio)" layout-margin>
+    <div layout-xs="column" flex-xs flex-gt-xs="30" ng-repeat="anuncio in anuncios"
+         ng-if="currentNavItem == 'servicos' && anuncio.tipo == 'SERVICO' && isSearchFiltered(anuncio)" layout-margin
+         ng-cloak>
 
         <md-card>
             <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out" style="width: inherit; height: auto">
@@ -185,6 +240,7 @@
             <md-card-content>
                 <p>
                     Este {{anuncio.tipo}} é fornecido com exclusividade pela ad-extreme!
+                    Data de criação: {{anuncio.dataDeCriacao}}
                 </p>
             </md-card-content>
         </md-card>
