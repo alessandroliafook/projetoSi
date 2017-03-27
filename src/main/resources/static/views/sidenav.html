@@ -10,12 +10,10 @@
   </md-toolbar>
 
   <md-content>
-      <section id="info-usuario">
+      <section id="info-usuario" ng-show="!carregandoUsuario">
         <div class="nome-usuario" md-colors="{color:'primary'}">Caio Vidal <span>(caiovidaln@gmail.com)</span></div>
         <div class="saldo-usuario">Saldo: <span class="saldo-conta">R$ 30,00</span></div>
         <div class="anuncios-usuario">0 anúncios ativos</div>
-        
-
       </section>
       <md-list>
         <md-divider inset></md-divider>

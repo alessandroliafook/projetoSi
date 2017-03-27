@@ -77,6 +77,13 @@ public class Fachada {
 		return administrador.getUsuario(id, chave);
 	}
 
+	@RequestMapping(value = "/usuario/", method = RequestMethod.GET)
+	public
+	@ResponseBody
+	Usuario getUsuario(@RequestHeader String chave) {
+		return administrador.getUsuario(chave);
+	}
+
 	@RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.POST, produces = MediaType
 			.TEXT_PLAIN_VALUE)
 	public
@@ -85,11 +92,11 @@ public class Fachada {
 		return administrador.autenticacao(email, senha);
 	}
 
-	@RequestMapping(value = "/usuario/saldo/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/usuario/saldo/", method = RequestMethod.GET)
 	public
 	@ResponseBody
-	double getSaldoUsuario(@PathVariable Long id, @RequestHeader String token) {
-		return administrador.getUsuario(id, token).getSaldo();
+	double getSaldoUsuario(@RequestHeader String token) {
+		return administrador.getUsuario(token).getSaldo();
 	}
 
 	@RequestMapping(value = "/usuario/nome/{id}", method = RequestMethod.GET, produces = MediaType
