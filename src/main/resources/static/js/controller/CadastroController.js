@@ -103,11 +103,22 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
         $state.go('login');
     }
 
+    var filtraAnunciosAtivos = function(anuncios) {
+        var i = 0;
+        for (var j = 0; j < anuncios.length; j++) {
+            if (!anuncios[j].vendido) {
+                i++;
+            }
+        }
+        $scope.anunciosAbertos = i;
+    }
+
     var pegaUsuario = function() {
         $scope.carregandoUsuario = true;
         $http.get("/usuario/").success(function (data) {
             if (data.length != 0) {
                 $scope.usuario = data;
+                filtraAnunciosAtivos($scope.usuario.idsAnuncios);
             }
             $scope.carregandoUsuario = false;
         }).error(function(err) {

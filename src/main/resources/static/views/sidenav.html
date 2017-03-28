@@ -22,7 +22,7 @@
     <section id="info-usuario" ng-show="!carregandoUsuario">
       <div class="nome-usuario" md-colors="{color:'primary'}">{{ usuario.nome }} <span>({{ usuario.email }})</span></div>
       <div class="saldo-usuario">Saldo: <span class="saldo-conta">R$ {{ usuario.saldo }}</span></div>
-      <div class="anuncios-usuario">0 anúncios ativos</div>
+      <div class="anuncios-usuario">{{ anunciosAbertos }} anúncio(s) ativo(s)</div>
     </section>
     <md-divider inset></md-divider>
     <md-content id="notificacoes-usuario" ng-show="!carregandoUsuario">

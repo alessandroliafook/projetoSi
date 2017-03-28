@@ -8,6 +8,7 @@ app.controller('MainController', function ($http, $scope, $state, $mdDialog, $md
 
     $scope.usuario = {};
     $scope.carregandoUsuario = true;
+    $scope.anunciosAbertos = 0;
 
     $scope.cadastrarAnuncio = function () {
         $state.go('cadastrarAnuncio');
@@ -26,6 +27,16 @@ app.controller('MainController', function ($http, $scope, $state, $mdDialog, $md
         $state.go('login');
     }
 
+    var filtraAnunciosAtivos = function(anuncios) {
+        var i = 0;
+        for (var j = 0; j < anuncios.length; j++) {
+            if (!anuncios[j].vendido) {
+                i++;
+            }
+        }
+        $scope.anunciosAbertos = i;
+    }
+
     $scope.openMenu = function($mdMenu, ev) {
         originatorEv = ev;
         $mdMenu.open(ev);
@@ -40,6 +51,7 @@ app.controller('MainController', function ($http, $scope, $state, $mdDialog, $md
         $http.get("/usuario/").success(function (data) {
             if (data.length != 0) {
                 $scope.usuario = data;
+                filtraAnunciosAtivos($scope.usuario.idsAnuncios);
             }
             $scope.carregandoUsuario = false;
         }).error(function(err) {
