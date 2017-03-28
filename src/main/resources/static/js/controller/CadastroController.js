@@ -1,6 +1,12 @@
-app.controller('CadastroController', function ($http, $scope, $state, AnuncioFactory, Auth, ModalService) {
+app.controller('CadastroController', function ($http, $scope, $state, AnuncioFactory, Auth, ModalService, Menu) {
 
     var self = this;
+
+    $scope.optionsMenu = Menu.getMenuOptionsAccount();
+    $scope.menuList = Menu.getMenuList();
+    $scope.heightWindow = window.innerHeight;
+
+    $scope.menu = Menu;
 
     self.inputDataModel = {
         title: "",
@@ -80,17 +86,7 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
     };
 
     self.sendData = function (anuncio, event) {
-        $http({
-            method: "POST",
-            url: "/usuario/anuncio/",
-            data: anuncio,
-            headers: {
-                'token': Auth.getToken(),
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        }).success(function (data, status) {
-            console.log(JSON.stringify(data) + "\n" + status);
+        $http.post("/usuario/anuncio/", anuncio).success(function (data, status) {
             ModalService.showConfirm(event, "Cadastro realizado", "Cadastro realizado com sucesso!");
             $scope.esperandoRequisicoes = false;
             $state.go('main');
@@ -106,6 +102,21 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
         alert("Você não está autenticado, para acessar essa página realize login.");
         $state.go('login');
     }
+
+    var pegaUsuario = function() {
+        $scope.carregandoUsuario = true;
+        $http.get("/usuario/").success(function (data) {
+            if (data.length != 0) {
+                $scope.usuario = data;
+            }
+            $scope.carregandoUsuario = false;
+        }).error(function(err) {
+            console.log(err);
+            $scope.carregandoUsuario = false;
+        });
+    }
+
+    pegaUsuario();
 
 
 });

@@ -48,20 +48,5 @@ app.controller('MainController', function ($http, $scope, $state, $mdDialog, $md
         });
     }
 
-    var pegaSaldo = function() {
-        $scope.carregandoSaldo = true;
-        $http.get("/usuario/saldo/").success(function (data) {
-            console.log(data);
-            if (data.length != 0) {
-                $scope.usuario.saldo = data;
-            }
-            $scope.carregandoSaldo = false;
-            
-        }).error(function(err) {
-            $scope.carregandoSaldo = false;
-            console.log(err);
-        });
-    }
-
     pegaUsuario();
 });

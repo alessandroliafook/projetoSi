@@ -28,7 +28,7 @@
     <md-content id="notificacoes-usuario" ng-show="!carregandoUsuario">
       <div id="titulo-notificacoes">
         <h3>Notificações</h3>
-        <p ng-show="usuario.notificacoes.length == 0">Sem notificações por enquanto...</p>
+        <p ng-if="usuario.notificacoes.length == 0">Sem notificações por enquanto...</p>
       </div>
       <md-list>
         <md-divider inset></md-divider>

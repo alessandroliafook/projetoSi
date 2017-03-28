@@ -28,6 +28,9 @@ public class Notificacao {
 	@Column
 	private Long idAnuncio;
 
+	public Notificacao() {
+	}
+
 	public Notificacao(String titulo, String mensagem, Long idUsuario, Long idAnuncio){
 		setTitulo(titulo);
 		setMensagem(mensagem);

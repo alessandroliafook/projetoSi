@@ -51,10 +51,9 @@ public class Administrador {
 		return null;
 	}
 
-	public Notificacao venderAnuncio(Long id, String chave) {
+	public Usuario venderAnuncio(Long id, String chave) {
 
 		Anuncio anuncio = getAnuncio(id, chave);
-
 		if (validarToken(chave) && !anuncio.getTipo().equals(TipoAnuncio.EMPREGO)) {
 
 			Token token = autenticacaoService.getTokenByChave(chave);
@@ -64,8 +63,9 @@ public class Administrador {
 			if (!comprador.equals(vendedor)) {
 
 				realizarNegocio(anuncio, comprador, vendedor);
-
-				return notificar(anuncio, comprador, vendedor);
+				notificar(anuncio, comprador, vendedor);
+				comprador = update(comprador, vendedor);
+				return comprador.copiaSemSenha();
 			}
 		}
 		return null;
@@ -152,7 +152,7 @@ public class Administrador {
 
 		comprador.realizarCompra(valorDaVenda);
 		vendedor.realizarVenda(valorDaVenda);
-		anuncio.realizarVendido();
+		anuncio.realizarVenda();
 	}
 
 	private Notificacao notificar(Anuncio anuncio, Usuario comprador, Usuario vendedor) {
@@ -182,6 +182,13 @@ public class Administrador {
 				anunciosDisponiveis.add(anuncio);
 		}
 		return anunciosDisponiveis;
+	}
+
+	private Usuario update(Usuario comprador, Usuario vendedor) {
+		usuarioService.update(vendedor);
+		usuarioService.update(comprador);
+		comprador = usuarioService.getById(comprador.getId());
+		return comprador;
 	}
 
 	private String generateToken(Usuario usuario) {

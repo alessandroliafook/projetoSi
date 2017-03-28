@@ -1,15 +1,30 @@
 <md-toolbar class="md-hue-2">
     <div class="md-toolbar-tools" layout="row">
 
+        <md-button class="md-icon-button" aria-label="Opções" ng-click="menu.changeSidenav()">
+            <md-icon><i class="material-icons">menu</i></md-icon>
+        </md-button>
+
         <h2 flex md-truncate>$ ad-extreme</h2>
 
 
-        <md-button ng-click="logout()">
-            <md-icon><i class="material-icons">exit_to_app</i></md-icon>
-            Logout
-        </md-button>
+        <md-menu>
+            <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                <md-icon><i class="material-icons">more_vert</i></md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in optionsMenu">
+                    <md-button ng-click="menu.changeState(item.state)">
+                        <md-icon><i class="material-icons">{{ item.icon }}</i></md-icon>
+                        {{ item.titulo }}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
     </div>
 </md-toolbar>
+
+<ng-include src="'/views/sidenav.html'"></ng-include>
 
 <md-content id="cadastro">
     <form name="cadastroAnuncioForm" layout="column">

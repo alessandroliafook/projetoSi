@@ -132,7 +132,7 @@ public class Anuncio {
         this.vendido = vendido;
     }
 
-    public void realizarVendido(){ setVendido(true);}
+    public void realizarVenda(){ setVendido(true);}
 
     public void setNomeUsuario(String nome) {
         this.nomeUsuario = nome;

@@ -1,4 +1,4 @@
-app.controller('AnunciosController', function ($scope, $http, Auth, $state, ModalService) {
+app.controller('AnunciosController', function ($scope, $http, Auth, $state, $mdDialog, $mdSidenav, ModalService, Menu) {
 
     var self = this;
 
@@ -7,6 +7,12 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state, Moda
     $scope.searchParam = "";
     $scope.currentNavItem = "moveis";
 
+    $scope.optionsMenu = Menu.getMenuOptionsAccount();
+    $scope.menuList = Menu.getMenuList();
+    $scope.heightWindow = window.innerHeight;
+
+    $scope.menu = Menu;
+
     $scope.carregandoRequisicaoAnuncio = false;
 
     $scope.goToMain = function () {
@@ -14,14 +20,7 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state, Moda
     };
 
     $scope.populate = function () {
-        $http({
-            method: "GET",
-            url: "/anuncio/listar/",
-            headers: {
-                'token': Auth.getToken()
-            }
-        }).success(function (data, status) {
-            console.log(JSON.stringify(data) + "\n" + status);
+        $http.get("/anuncio/listar/").success(function (data, status) {
             $scope.anuncios = data;
         }).error(function (err) {
             console.log(err);
@@ -53,9 +52,7 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state, Moda
 
     $scope.compraAnuncio = function(anuncio) {
         $scope.carregandoRequisicaoAnuncio = true;
-        console.log(anuncio);
         $http.post("/anuncio/vender/"+anuncio.id).success(function (data) {
-            console.log(data);
             if (data.length != 0) {
                 var index = $scope.anuncios.indexOf(anuncio);
                 if (index > -1) {
@@ -69,5 +66,20 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state, Moda
             $scope.carregandoRequisicaoAnuncio = false;
         });
     }
+
+    var pegaUsuario = function() {
+        $scope.carregandoUsuario = true;
+        $http.get("/usuario/").success(function (data) {
+            if (data.length != 0) {
+                $scope.usuario = data;
+            }
+            $scope.carregandoUsuario = false;
+        }).error(function(err) {
+            console.log(err);
+            $scope.carregandoUsuario = false;
+        });
+    }
+
+    pegaUsuario();
 
 });

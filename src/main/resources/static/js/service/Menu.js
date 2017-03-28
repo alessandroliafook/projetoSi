@@ -14,18 +14,12 @@ app.service('Menu',function($state, $mdSidenav, Auth) {
 
 	this.getMenuOptionsAccount = function () {
 		var options = [];
-		opcao0 = {
-			titulo: "Meus dados",
-			state: "contato",
-			icon: "account_circle"
-		};
 		opcao1 = {
 			titulo: "Logout",
 			state: "login",
 			icon: "exit_to_app"
 		};
 
-		options.push(opcao0);
 		options.push(opcao1);
 
 		return options;

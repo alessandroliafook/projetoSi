@@ -4,7 +4,6 @@ app.controller('LoginController', function ($http, $scope, $mdToast, $state, Aut
 
     $scope.login = function (usuario, event) {
         $scope.estaLogando = true;
-        console.log(usuario.login + " senha = " + usuario.senha);
         $http({
             method: 'POST',
             url: '/autenticacao/' + usuario.login + "/" + usuario.senha,

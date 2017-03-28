@@ -39,7 +39,7 @@ public class Fachada {
 	@RequestMapping(value = "/anuncio/vender/{id}", method = RequestMethod.POST)
 	public
 	@ResponseBody
-	Notificacao venderAnuncio(@PathVariable Long id, @RequestHeader String token) {
+	Usuario venderAnuncio(@PathVariable Long id, @RequestHeader String token) {
 		return administrador.venderAnuncio(id, token);
 	}
 
