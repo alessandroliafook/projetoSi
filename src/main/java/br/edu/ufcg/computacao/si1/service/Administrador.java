@@ -64,7 +64,9 @@ public class Administrador {
 
 				realizarNegocio(anuncio, comprador, vendedor);
 				notificar(anuncio, comprador, vendedor);
-				comprador = update(comprador, vendedor);
+				update(comprador, vendedor, anuncio);
+
+				comprador = usuarioService.getById(comprador.getId());
 				return comprador.copiaSemSenha();
 			}
 		}
@@ -184,11 +186,10 @@ public class Administrador {
 		return anunciosDisponiveis;
 	}
 
-	private Usuario update(Usuario comprador, Usuario vendedor) {
+	private void update(Usuario comprador, Usuario vendedor, Anuncio anuncio) {
 		usuarioService.update(vendedor);
 		usuarioService.update(comprador);
-		comprador = usuarioService.getById(comprador.getId());
-		return comprador;
+		anuncioService.update(anuncio);
 	}
 
 	private String generateToken(Usuario usuario) {
