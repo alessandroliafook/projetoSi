@@ -38,7 +38,7 @@ public class Fachada {
 	@RequestMapping(value = "/anuncio/vender", method = RequestMethod.POST)
 	public
 	@ResponseBody
-	Notificacao venderAnuncio(@RequestBody Anuncio anuncio, @RequestHeader String chave) {
+	Usuario venderAnuncio(@RequestBody Anuncio anuncio, @RequestHeader String chave) {
 		return administrador.venderAnuncio(anuncio, chave);
 	}
 
