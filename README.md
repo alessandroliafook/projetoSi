@@ -1,6 +1,9 @@
-
 # projetoSi
 Projejto para conclusão da disciplina de SI
+
+## Especificação do Projeto
+
+ https://docs.google.com/document/d/10Zt_vvNYfyVgI50dHmww4ryOkxJ5b0jYjULZNjY8vLk/pub
 
 ## Documentação do Projeto
 
