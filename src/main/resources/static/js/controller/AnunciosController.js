@@ -50,7 +50,7 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state, $mdD
     }
 
 
-    $scope.compraAnuncio = function(anuncio) {
+    $scope.compraAnuncio = function(anuncio, event) {
         $scope.carregandoRequisicaoAnuncio = true;
         $http.post("/anuncio/vender/"+anuncio.id).success(function (data) {
             if (data.length != 0) {
