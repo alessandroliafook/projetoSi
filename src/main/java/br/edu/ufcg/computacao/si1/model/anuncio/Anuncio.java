@@ -9,9 +9,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Marcus Oliveira on 08/12/16.
- */
 @Entity
 @Table(name="tb_anuncio")
 public class Anuncio {

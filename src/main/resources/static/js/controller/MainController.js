@@ -1,4 +1,4 @@
-app.controller('MainController', function ($scope, $state, $mdDialog, $mdSidenav, Auth, Menu) {
+app.controller('MainController', function ($http, $scope, $state, $mdDialog, $mdSidenav, Auth, Menu) {
 
     $scope.optionsMenu = Menu.getMenuOptionsAccount();
     $scope.menuList = Menu.getMenuList();
@@ -40,7 +40,6 @@ app.controller('MainController', function ($scope, $state, $mdDialog, $mdSidenav
         $http.get("/usuario/").success(function (data) {
             if (data.length != 0) {
                 $scope.usuario = data;
-                console.log(data);
             }
             $scope.carregandoUsuario = false;
         }).error(function(err) {

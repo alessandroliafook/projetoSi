@@ -51,7 +51,9 @@ public class Administrador {
 		return null;
 	}
 
-	public Notificacao venderAnuncio(Anuncio anuncio, String chave) {
+	public Notificacao venderAnuncio(Long id, String chave) {
+
+		Anuncio anuncio = getAnuncio(id, chave);
 
 		if (validarToken(chave) && !anuncio.getTipo().equals(TipoAnuncio.EMPREGO)) {
 

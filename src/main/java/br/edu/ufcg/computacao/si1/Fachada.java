@@ -5,6 +5,7 @@ import br.edu.ufcg.computacao.si1.model.anuncio.Anuncio;
 import br.edu.ufcg.computacao.si1.model.usuario.TipoUsuario;
 import br.edu.ufcg.computacao.si1.model.usuario.Usuario;
 import br.edu.ufcg.computacao.si1.service.Administrador;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +36,11 @@ public class Fachada {
 	}
 
 
-	@RequestMapping(value = "/anuncio/vender", method = RequestMethod.POST)
+	@RequestMapping(value = "/anuncio/vender/{id}", method = RequestMethod.POST)
 	public
 	@ResponseBody
-	Notificacao venderAnuncio(@RequestBody Anuncio anuncio, @RequestHeader String chave) {
-		return administrador.venderAnuncio(anuncio, chave);
+	Notificacao venderAnuncio(@PathVariable Long id, @RequestHeader String token) {
+		return administrador.venderAnuncio(id, token);
 	}
 
 	@RequestMapping(value = "/anuncio/{id}", method = RequestMethod.GET)
@@ -80,8 +81,8 @@ public class Fachada {
 	@RequestMapping(value = "/usuario/", method = RequestMethod.GET)
 	public
 	@ResponseBody
-	Usuario getUsuario(@RequestHeader String chave) {
-		return administrador.getUsuario(chave);
+	Usuario getUsuario(@RequestHeader String token) {
+		return administrador.getUsuario(token).copiaSemSenha();
 	}
 
 	@RequestMapping(value = "/autenticacao/{email}/{senha}", method = RequestMethod.POST, produces = MediaType

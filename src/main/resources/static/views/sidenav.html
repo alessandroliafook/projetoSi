@@ -10,20 +10,39 @@
   </md-toolbar>
 
   <md-content>
-      <section id="info-usuario" ng-show="!carregandoUsuario">
-        <div class="nome-usuario" md-colors="{color:'primary'}">Caio Vidal <span>(caiovidaln@gmail.com)</span></div>
-        <div class="saldo-usuario">Saldo: <span class="saldo-conta">R$ 30,00</span></div>
-        <div class="anuncios-usuario">0 anúncios ativos</div>
-      </section>
+    <md-list>
+      <md-divider inset></md-divider>
+      <md-list-item class="md-3-line md-icon-float"" ng-repeat="item in menuList" ng-click="menu.changeState(item.state)" ng-show="item.state != menu.currentState()">
+        <md-icon md-colors="{background:'primary'}" class="md-primary md-avatar-icon icon-menu-sidebar"><i class="material-icons">{{ item.icon }}</i></md-icon>
+        <h3 class="md-primary" flex>{{item.titulo}}</h3>
+        <md-divider inset></md-divider>
+      </md-list-item>
+      <md-divider inset></md-divider>
+    </md-list>
+    <section id="info-usuario" ng-show="!carregandoUsuario">
+      <div class="nome-usuario" md-colors="{color:'primary'}">{{ usuario.nome }} <span>({{ usuario.email }})</span></div>
+      <div class="saldo-usuario">Saldo: <span class="saldo-conta">R$ {{ usuario.saldo }}</span></div>
+      <div class="anuncios-usuario">0 anúncios ativos</div>
+    </section>
+    <md-divider inset></md-divider>
+    <md-content id="notificacoes-usuario" ng-show="!carregandoUsuario">
+      <div id="titulo-notificacoes">
+        <h3>Notificações</h3>
+        <p ng-show="usuario.notificacoes.length == 0">Sem notificações por enquanto...</p>
+      </div>
       <md-list>
         <md-divider inset></md-divider>
-        <md-list-item class="md-3-line md-icon-float"" ng-repeat="item in menuList" ng-click="menu.changeState(item.state)" ng-show="item.state != menu.currentState()">
-          <md-icon md-colors="{background:'primary'}" class="md-primary md-avatar-icon icon-menu-sidebar"><i class="material-icons">{{ item.icon }}</i></md-icon>
-          <h3 class="md-primary" flex>{{item.titulo}}</h3>
+        <md-list-item class="md-3-line md-icon-float" ng-repeat="notificacao in usuario.notificacoes" ng-class="{'notificacao-nova': !notificacao.visto}" ng-click="abrirAnuncio(notificacao.idAnuncio)">
+          <div class="md-list-item-text" layout="column">
+            <h3 class="md-primary" flex>{{ notificacao.titulo }}</h3>
+            <p>{{ notificacao.mensagem }}</p>
+          </div>
           <md-divider inset></md-divider>
         </md-list-item>
         <md-divider inset></md-divider>
       </md-list>
+    </md-content>
+    
   </md-content>
 
 </md-sidenav>

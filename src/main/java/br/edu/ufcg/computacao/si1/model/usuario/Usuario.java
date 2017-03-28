@@ -33,7 +33,6 @@ public class Usuario {
     private TipoUsuario tipo;
 
     @Column
-    @DecimalMin(value = "0.0")
     private double saldo;
 
     @OneToMany

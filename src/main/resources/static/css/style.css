@@ -76,6 +76,23 @@ body {
     margin:0 0 5px;
 }
 
+#notificacoes-usuario {
+    padding: 0px;
+}
+
+#titulo-notificacoes {
+    padding: 10px;
+}
+
+#notificacoes-usuario h3, p {
+    padding: 0px;
+    margin:0 0 5px;
+}
+
+.notificacao-nova {
+    background: #fffddd!important;
+}
+
 .md-errors-spacer:empty {
     display: none;
 }

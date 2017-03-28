@@ -1,4 +1,4 @@
-app.controller('AnunciosController', function ($scope, $http, Auth, $state) {
+app.controller('AnunciosController', function ($scope, $http, Auth, $state, ModalService) {
 
     var self = this;
 
@@ -6,6 +6,8 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state) {
     $scope.anuncios;
     $scope.searchParam = "";
     $scope.currentNavItem = "moveis";
+
+    $scope.carregandoRequisicaoAnuncio = false;
 
     $scope.goToMain = function () {
         $state.go('main');
@@ -46,6 +48,26 @@ app.controller('AnunciosController', function ($scope, $http, Auth, $state) {
     if (Auth.getToken() == null) {
         alert("Você não está autenticado, para acessar essa página realize login.");
         $state.go('login');
+    }
+
+
+    $scope.compraAnuncio = function(anuncio) {
+        $scope.carregandoRequisicaoAnuncio = true;
+        console.log(anuncio);
+        $http.post("/anuncio/vender/"+anuncio.id).success(function (data) {
+            console.log(data);
+            if (data.length != 0) {
+                var index = $scope.anuncios.indexOf(anuncio);
+                if (index > -1) {
+                    $scope.anuncios.splice(index, 1);
+                }
+                ModalService.showConfirm(event, "Compra efetuada", "Sua conta foi efetuada com sucesso e descontada do seu saldo.");
+            }
+            $scope.carregandoRequisicaoAnuncio = false;
+        }).error(function(err) {
+            console.log(err);
+            $scope.carregandoRequisicaoAnuncio = false;
+        });
     }
 
 });
