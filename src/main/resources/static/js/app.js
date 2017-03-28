@@ -1,0 +1,1 @@
+var app = angular.module('AdExtreme', ['ngMaterial', 'ui.router', 'ngCookies']);

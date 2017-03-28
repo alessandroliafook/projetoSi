@@ -1,37 +1,107 @@
 @import url("menu.css");
+@import url('https://fonts.googleapis.com/css?family=Roboto|Slabo+27px');
 
-html {
-    position: relative;
-    min-height: 100%;
-}
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #FFFFFF;
+    padding: 0;
+    margin: 0;
+    background: #ebebeb;
+    
 }
 
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-body > .container {
-    padding: 60px 15px 0;
-}
-.container .text-muted {
-    margin: 20px 0;
+#cadastro {
+    background: #ebebeb;
 }
 
-.footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
+#fonte1 {
+    font-family: 'Slabo 27px', serif;
 }
 
+#fonte2 {
+    font-family: 'Roboto', sans-serif;
+}
+
+#cadastro-form {
+    width: 400px;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .3);
+}
+
+#login, #tudo {
+    background: #ebebeb;
+}
+
+#login-form {
+    width: 400px;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .3);
+}
+
+.button-right {
+    float: right;
+}
+
+.fixedNav {
+    position: fixed;
+    top: 0;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+#info-usuario {
+    padding: 10px;
+}
+
+.nome-usuario {
+    font-size: 18px;
+    font-style: bold;
+    margin:5px 0 10px;
+}
+
+.nome-usuario span{
+    font-size: 17px;
+    font-style: normal;
+}
+
+.saldo-usuario {
+    font-size: 18px;
+    margin:0 0 5px;
+}
+
+.anuncios-usuario {
+    font-size: 16px;
+    margin:0 0 5px;
+}
+
+#notificacoes-usuario {
+    padding: 0px;
+}
+
+#titulo-notificacoes {
+    padding: 10px;
+}
+
+#notificacoes-usuario h3, p {
+    padding: 0px;
+    margin:0 0 5px;
+}
+
+.notificacao-nova {
+    background: #fffddd!important;
+}
+
+.md-errors-spacer:empty {
+    display: none;
+}
+
+.fixed-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
 
