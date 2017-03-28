@@ -51,8 +51,9 @@ app.controller('CadastroController', function ($http, $scope, $state, AnuncioFac
 
             var tipoUsuario = data.data;
 
-            if (anuncio.tipo == "SERVICO" && tipoUsuario !== "JURIDICO") {
-                ModalService.showConfirm(event, "Não autorizado", "Apenas pessoas jurídicas podem oferecer serviços.");
+            if ((anuncio.tipo == "SERVICO" || anuncio.tipo == "EMPREGO") && tipoUsuario !== "JURIDICO") {
+                ModalService.showConfirm(event, "Não autorizado", "Apenas pessoas jurídicas podem oferecer " +
+                    anuncio.tipo.toLowerCase()+ "s.");
                 $scope.esperandoRequisicoes = false;
             }
 
